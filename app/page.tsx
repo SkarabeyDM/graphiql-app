@@ -1,7 +1,7 @@
 import style from './page.module.scss';
 
-const Home = () => {
+const HomePageComponent = () => {
   return <h1 className={style.title}>REST/GraphiQL Client</h1>;
 };
 
-export default Home;
+export default HomePageComponent;
