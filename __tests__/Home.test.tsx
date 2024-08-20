@@ -10,3 +10,12 @@ describe('Page', () => {
     expect(title).toBeInTheDocument();
   });
 });
+
+describe('Page', () => {
+  it('renders Home page component with inclide the button', () => {
+    render(<HomePageComponent />);
+
+    const button = screen.getByText('Contained');
+    expect(button).toBeInTheDocument();
+  });
+});
