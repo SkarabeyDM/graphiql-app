@@ -1,12 +1,28 @@
-import style from './page.module.scss';
-import Button from '@mui/material/Button';
+import { Button, Typography } from '@mui/material';
+import Grid from '@mui/material/Unstable_Grid2';
 
 const HomePageComponent = () => {
   return (
-    <div style={{ background: '#808080' }} className={style.wrapper}>
-      <h1 className={style.title}>REST/GraphiQL Client</h1>
-      <Button variant="contained">Contained</Button>
-    </div>
+    <Grid
+      container
+      direction="column"
+      justifyContent="center"
+      alignItems="center"
+      minHeight="100%"
+      width="100%"
+      spacing={4}
+      bgcolor="pink"
+      m={0}
+    >
+      <Grid>
+        <Typography variant="h4" fontWeight="bold" fontStyle="italic">
+          REST/GraphiQL Client
+        </Typography>
+      </Grid>
+      <Grid>
+        <Button variant="contained">Contained</Button>
+      </Grid>
+    </Grid>
   );
 };
 
