@@ -2,7 +2,7 @@ import type { Metadata } from 'next';
 import { AppRouterCacheProvider } from '@mui/material-nextjs/v13-appRouter';
 
 import { Inter } from 'next/font/google';
-import './globals.scss';
+import { Box } from '@mui/material';
 
 const inter = Inter({ subsets: ['latin'] });
 
@@ -17,11 +17,17 @@ const RootLayout = ({
   children: React.ReactNode;
 }>) => {
   return (
-    <html lang="en">
-      <body className={inter.className}>
+    <Box component="html" height="100%" lang="en">
+      <Box
+        component="body"
+        m={0}
+        height="100%"
+        minHeight="100%"
+        className={inter.className}
+      >
         <AppRouterCacheProvider>{children}</AppRouterCacheProvider>
-      </body>
-    </html>
+      </Box>
+    </Box>
   );
 };
 
