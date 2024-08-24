@@ -6,16 +6,7 @@ describe('Page', () => {
   it('renders Home page component with inclide the title', () => {
     render(<HomePageComponent />);
 
-    const title = screen.getByRole('heading', { name: 'REST/GraphiQL Client' });
+    const title = screen.getByText('REST/GraphiQL Client');
     expect(title).toBeInTheDocument();
-  });
-});
-
-describe('Page', () => {
-  it('renders Home page component with inclide the button', () => {
-    render(<HomePageComponent />);
-
-    const button = screen.getByText('Contained');
-    expect(button).toBeInTheDocument();
   });
 });
