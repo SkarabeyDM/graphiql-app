@@ -1,0 +1,107 @@
+import { initializeApp } from 'firebase/app';
+import {
+  // GoogleAuthProvider,
+  getAuth,
+  // signInWithPopup,
+  signInWithEmailAndPassword,
+  createUserWithEmailAndPassword,
+  signOut,
+  // UserCredential,
+  // User,
+} from 'firebase/auth';
+import {
+  getFirestore,
+  // query,
+  // getDocs,
+  collection,
+  // where,
+  addDoc,
+} from 'firebase/firestore';
+import { IAuth } from './authorization.model';
+
+const firebaseConfig = {
+  apiKey: 'AIzaSyC7IKge1Z-UxaJg5QMTTWHY2vKcbYbJmOQ',
+  authDomain: 'graphiql-app-7ee6f.firebaseapp.com',
+  projectId: 'graphiql-app-7ee6f',
+  storageBucket: 'graphiql-app-7ee6f.appspot.com',
+  messagingSenderId: '653268373411',
+  appId: '1:653268373411:web:abf5b6f868dc2d300f1416',
+  measurementId: 'G-8M6Y0RDNGK',
+};
+
+const app = initializeApp(firebaseConfig);
+const auth = getAuth(app);
+const db = getFirestore(app);
+
+// const googleProvider = new GoogleAuthProvider();
+
+// const signInWithGoogle = async () => {
+//   try {
+//     const res = await signInWithPopup(auth, googleProvider);
+//     const user = res.user;
+//     const q = query(collection(db, 'users'), where('uid', '==', user.uid));
+//     const docs = await getDocs(q);
+//     if (docs.docs.length === 0) {
+//       await addDoc(collection(db, 'users'), {
+//         uid: user.uid,
+//         name: user.displayName,
+//         authProvider: 'google',
+//         email: user.email,
+//       });
+//       return docs.docs;
+//     }
+//   } catch (err) {
+//     console.log(err);
+//   }
+// };
+
+const logInWithEmailAndPassword: (
+  data: IAuth,
+) => Promise<boolean | string> = async (data) => {
+  try {
+    await signInWithEmailAndPassword(auth, data.email, data.password);
+    return true;
+  } catch (error) {
+    if (error instanceof Error) {
+      return error.message;
+    }
+    return 'Operation is failed...';
+  }
+};
+
+const registerWithEmailAndPassword: (
+  data: IAuth,
+) => Promise<boolean | string> = async (data) => {
+  try {
+    const res = await createUserWithEmailAndPassword(
+      auth,
+      data.email,
+      data.password,
+    );
+    const user = res.user;
+    await addDoc(collection(db, 'users'), {
+      uid: user.uid,
+      name: 'user',
+      authProvider: 'local',
+      data: data.email,
+    });
+    return true;
+  } catch (error) {
+    if (error instanceof Error) {
+      return error.message;
+    }
+    return 'Operation is failed...';
+  }
+};
+
+const logout: () => void = () => {
+  signOut(auth);
+};
+
+export {
+  auth,
+  db,
+  logInWithEmailAndPassword,
+  registerWithEmailAndPassword,
+  logout,
+};

@@ -1,5 +1,6 @@
-import { Button, Typography } from '@mui/material';
+import { Typography } from '@mui/material';
 import Grid from '@mui/material/Unstable_Grid2';
+import AuthorizationComponent from '@widgets/authorization/Authorisation.component';
 
 const HomePageComponent = () => {
   return (
@@ -13,6 +14,7 @@ const HomePageComponent = () => {
       spacing={4}
       bgcolor="pink"
       m={0}
+      position="relative"
     >
       <Grid>
         <Typography variant="h4" fontWeight="bold" fontStyle="italic">
@@ -20,7 +22,7 @@ const HomePageComponent = () => {
         </Typography>
       </Grid>
       <Grid>
-        <Button variant="contained">Contained</Button>
+        <AuthorizationComponent />
       </Grid>
     </Grid>
   );
