@@ -16,7 +16,7 @@ const alertSlice = createSlice({
       state.alertState = action.payload;
       setTimeout(() => {
         hideAlert();
-      }, 4500);
+      }, 3000);
     },
 
     hideAlert(state) {

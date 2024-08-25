@@ -1,24 +1,25 @@
 'use client';
-import { Alert } from '@mui/material';
-import { useAppDispatch, useAppSelector } from '../../shared/redux/hook';
-
-import './style.css';
-import { hideAlert } from '@shared/redux/slices/alertSlice';
+import { Alert, Box } from '@mui/material';
+import { useAppSelector } from '../../shared/redux/hook';
 
 const AlertComponent = () => {
   const alert = useAppSelector((state) => state.alertState);
-  const dispatch = useAppDispatch();
-
-  setTimeout(() => {
-    dispatch(hideAlert());
-  }, 5000);
 
   return (
-    <div className={`custom-alert ${alert.alertState.alert ? 'active' : ''}`}>
+    <Box
+      component="div"
+      position="absolute"
+      top="0"
+      right="0"
+      style={{
+        msTransitionDuration: '0.3s',
+        opacity: alert.alertState.alert ? '1' : '0',
+      }}
+    >
       <Alert severity={alert.alertState.style}>
         {alert.alertState.alertText}
       </Alert>
-    </div>
+    </Box>
   );
 };
 
