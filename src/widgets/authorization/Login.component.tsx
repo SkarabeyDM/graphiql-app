@@ -148,7 +148,7 @@ const LoginComponent = () => {
               transform: 'translateY(-50%)',
             }}
           >
-            {showPassword ? <Visibility /> : <VisibilityOff />}
+            {showConfirmPassword ? <Visibility /> : <VisibilityOff />}
           </IconButton>
           <Box
             component="div"
