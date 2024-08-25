@@ -1,13 +1,12 @@
-/* eslint-disable no-console */
 'use client';
-import { useEffect, useState } from 'react';
+import { useState } from 'react';
 import { useForm } from 'react-hook-form';
-import { useAuthState } from 'react-firebase-hooks/auth';
+
 import { Button, IconButton } from '@mui/material';
 import Box from '@mui/material/Box';
 import TextField from '@mui/material/TextField';
 
-import { auth, logInWithEmailAndPassword, logout } from './model/firebase';
+import { logInWithEmailAndPassword, logout } from './model/firebase';
 import { IAuth, IFormData } from './model/authorization.model';
 import { useAppDispatch } from '@shared/redux/hook';
 import { showAlert } from '@shared/redux/slices/alertSlice';
@@ -18,18 +17,8 @@ import { Visibility, VisibilityOff } from '@mui/icons-material';
 
 const LoginComponent = () => {
   const dispatch = useAppDispatch();
-  const [user, loading] = useAuthState(auth);
 
-  useEffect(() => {
-    if (loading) {
-      return;
-    }
-    if (user) console.log('TODO'); //TODO
-  }, [user, loading]);
-
-  const data: IAuth = { email: 'qwerty0002@mail.ru', password: 'Qwerty123$' };
-
-  const userLogin = async () => {
+  const userLogin = async (data: IAuth) => {
     const result = await logInWithEmailAndPassword(data);
     if (typeof result === 'boolean') {
       dispatch(
@@ -60,8 +49,7 @@ const LoginComponent = () => {
 
   const {
     register,
-    formState: { errors },
-    // control,
+    formState: { isValid, errors },
     handleSubmit,
     reset,
   } = useForm({
@@ -69,8 +57,9 @@ const LoginComponent = () => {
     resolver: yupResolver(schema),
   });
 
-  const onSubmit = (data: IFormData) => {
-    console.log(data);
+  const onSubmit = async (data: IFormData) => {
+    const loginData: IAuth = { email: data.email, password: data.password };
+    await userLogin(loginData);
     reset();
   };
 
@@ -173,10 +162,15 @@ const LoginComponent = () => {
           </Box>
         </Box>
         <Box component="div" display="flex" justifyContent="space-between">
-          <Button onClick={userLogin} variant="contained">
+          <Button
+            data-testid="Login"
+            disabled={!isValid}
+            type="submit"
+            variant="contained"
+          >
             Login
           </Button>
-          <Button onClick={userLogout} variant="contained">
+          <Button data-testid="Logout" onClick={userLogout} variant="contained">
             Logout
           </Button>
         </Box>

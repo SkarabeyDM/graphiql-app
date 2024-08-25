@@ -1,13 +1,11 @@
-/* eslint-disable no-console */
 'use client';
-import { useEffect, useState } from 'react';
+import { useState } from 'react';
 import { useForm } from 'react-hook-form';
 
 import { useAppDispatch } from '@shared/redux/hook';
 import { showAlert } from '@shared/redux/slices/alertSlice';
 
-import { useAuthState } from 'react-firebase-hooks/auth';
-import { auth, registerWithEmailAndPassword } from './model/firebase';
+import { registerWithEmailAndPassword } from './model/firebase';
 import { IAuth, IFormData } from './model/authorization.model';
 import { AlertStyle } from '@widgets/alert/model/Alert.model';
 
@@ -18,19 +16,12 @@ import { yupResolver } from '@hookform/resolvers/yup';
 import { Visibility, VisibilityOff } from '@mui/icons-material';
 
 const RegistrationComponent = () => {
+  const [showPassword, setShowPassword] = useState(false);
+  const [showConfirmPassword, setShowConfirmPassword] = useState(false);
+
   const dispatch = useAppDispatch();
-  const [user, loading] = useAuthState(auth);
 
-  useEffect(() => {
-    if (loading) {
-      return;
-    }
-    if (user) console.log('user');
-  }, [user, loading]);
-
-  const data: IAuth = { email: 'qwerty0002@mail.ru', password: 'Qwerty123$' };
-
-  const userRegistration = async () => {
+  const userRegistration = async (data: IAuth) => {
     const result = await registerWithEmailAndPassword(data);
     if (typeof result === 'boolean') {
       dispatch(
@@ -50,8 +41,7 @@ const RegistrationComponent = () => {
 
   const {
     register,
-    formState: { errors },
-    // control,
+    formState: { isValid, errors },
     handleSubmit,
     reset,
   } = useForm({
@@ -59,13 +49,11 @@ const RegistrationComponent = () => {
     resolver: yupResolver(schema),
   });
 
-  const onSubmit = (data: IFormData) => {
-    console.log(data);
+  const onSubmit = async (data: IFormData) => {
+    const regData: IAuth = { email: data.email, password: data.password };
+    await userRegistration(regData);
     reset();
   };
-
-  const [showPassword, setShowPassword] = useState(false);
-  const [showConfirmPassword, setShowConfirmPassword] = useState(false);
 
   return (
     <Box component="div" display="flex" flexDirection="column">
@@ -163,7 +151,12 @@ const RegistrationComponent = () => {
           </Box>
         </Box>
 
-        <Button onClick={userRegistration} variant="contained">
+        <Button
+          data-testid="Registration"
+          disabled={!isValid}
+          type="submit"
+          variant="contained"
+        >
           Registration
         </Button>
       </Box>
