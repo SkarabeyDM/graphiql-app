@@ -1,9 +1,15 @@
 'use client';
 import { Alert, Box } from '@mui/material';
-import { useAppSelector } from '../../shared/redux/hook';
+import { useAppSelector, useAppDispatch } from '../../shared/redux/hook';
+import { hideAlert } from '@shared/redux/slices/alertSlice';
 
 const AlertComponent = () => {
   const alert = useAppSelector((state) => state.alertState);
+  const dispatch = useAppDispatch();
+
+  setTimeout(() => {
+    dispatch(hideAlert());
+  }, 3000);
 
   return (
     <Box
