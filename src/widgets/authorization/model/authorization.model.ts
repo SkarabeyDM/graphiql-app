@@ -6,3 +6,8 @@ export interface IAuth {
 export interface IFormData extends IAuth {
   confirmPassword: string;
 }
+
+export interface IIconPassword {
+  showPassword: boolean;
+  setShowPassword: (value: boolean) => void;
+}

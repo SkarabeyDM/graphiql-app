@@ -2,24 +2,35 @@
 import { useState } from 'react';
 import { useForm } from 'react-hook-form';
 
-import { useAppDispatch } from '@shared/redux/hook';
+import { useAppDispatch } from '@shared/hooks/hook';
 import { showAlert } from '@shared/redux/slices/alertSlice';
 
-import { registerWithEmailAndPassword } from './model/firebase';
-import { IAuth, IFormData } from './model/authorization.model';
+import { registerWithEmailAndPassword } from '../../model/firebase';
+import { IAuth, IFormData } from '../../model/authorization.model';
 import { AlertStyle } from '@widgets/alert/model/Alert.model';
 
-import { Box, Button, IconButton, TextField } from '@mui/material';
+import { Box, Button, TextField } from '@mui/material';
 
-import { schema } from './model/schema';
+import { regSchema } from '../../model/schema';
 import { yupResolver } from '@hookform/resolvers/yup';
-import { Visibility, VisibilityOff } from '@mui/icons-material';
+import { IconPassword } from '@widgets/authorization/IconPassword';
+import { TextFieldHint } from '@widgets/authorization/TextFieldHint';
 
 const RegistrationComponent = () => {
   const [showPassword, setShowPassword] = useState(false);
   const [showConfirmPassword, setShowConfirmPassword] = useState(false);
 
   const dispatch = useAppDispatch();
+
+  const {
+    register,
+    formState: { isValid, errors },
+    handleSubmit,
+    reset,
+  } = useForm({
+    mode: 'onChange',
+    resolver: yupResolver(regSchema),
+  });
 
   const userRegistration = async (data: IAuth) => {
     const result = await registerWithEmailAndPassword(data);
@@ -31,32 +42,22 @@ const RegistrationComponent = () => {
           alertText: 'Registration was successful',
         }),
       );
+      reset();
 
-      // TODO  navigation !!
+      // TODO  navigation or other state change !!
     } else
       dispatch(
         showAlert({ alert: true, style: AlertStyle.error, alertText: result }),
       );
   };
 
-  const {
-    register,
-    formState: { isValid, errors },
-    handleSubmit,
-    reset,
-  } = useForm({
-    mode: 'onChange',
-    resolver: yupResolver(schema),
-  });
-
   const onSubmit = async (data: IFormData) => {
     const regData: IAuth = { email: data.email, password: data.password };
     await userRegistration(regData);
-    reset();
   };
 
   return (
-    <Box component="div" display="flex" flexDirection="column">
+    <Box display="flex" flexDirection="column">
       <h2>Registration</h2>
       <Box
         component="form"
@@ -69,7 +70,7 @@ const RegistrationComponent = () => {
         noValidate
         autoComplete="off"
       >
-        <Box component="div" position="relative">
+        <Box position="relative">
           <TextField
             fullWidth
             id="email"
@@ -77,18 +78,14 @@ const RegistrationComponent = () => {
             variant="filled"
             {...register('email', { onChange: () => null })}
           />
-          <Box
-            component="div"
-            position="absolute"
-            left="0"
-            bottom="-1em"
-            color="#ff0000"
-            fontSize="0.6em"
-          >
-            {errors.email?.message}
-          </Box>
+
+          <TextFieldHint
+            text={
+              errors.email && errors.email.message ? errors.email.message : ''
+            }
+          />
         </Box>
-        <Box component="div" position="relative">
+        <Box position="relative">
           <TextField
             fullWidth
             id="password"
@@ -97,29 +94,20 @@ const RegistrationComponent = () => {
             type={showPassword ? 'text' : 'password'}
             {...register('password', { onChange: () => null })}
           />
-          <IconButton
-            onClick={() => setShowPassword(!showPassword)}
-            sx={{
-              position: 'absolute',
-              right: 0,
-              top: '50%',
-              transform: 'translateY(-50%)',
-            }}
-          >
-            {showPassword ? <Visibility /> : <VisibilityOff />}
-          </IconButton>
-          <Box
-            component="div"
-            position="absolute"
-            left="0"
-            bottom="-1em"
-            color="#ff0000"
-            fontSize="0.6em"
-          >
-            {errors.password?.message}
-          </Box>
+          <IconPassword
+            setShowPassword={setShowPassword}
+            showPassword={showPassword}
+          />
+
+          <TextFieldHint
+            text={
+              errors.password && errors.password.message
+                ? errors.password.message
+                : ''
+            }
+          />
         </Box>
-        <Box component="div" position="relative">
+        <Box position="relative">
           <TextField
             fullWidth
             id="confirmPassword"
@@ -128,27 +116,18 @@ const RegistrationComponent = () => {
             type={showConfirmPassword ? 'text' : 'password'}
             {...register('confirmPassword', { onChange: () => null })}
           />
-          <IconButton
-            onClick={() => setShowConfirmPassword(!showConfirmPassword)}
-            sx={{
-              position: 'absolute',
-              right: 0,
-              top: '50%',
-              transform: 'translateY(-50%)',
-            }}
-          >
-            {showConfirmPassword ? <Visibility /> : <VisibilityOff />}
-          </IconButton>
-          <Box
-            component="div"
-            position="absolute"
-            left="0"
-            bottom="-1em"
-            color="#ff0000"
-            fontSize="0.6em"
-          >
-            {errors.confirmPassword?.message}
-          </Box>
+          <IconPassword
+            setShowPassword={setShowConfirmPassword}
+            showPassword={showConfirmPassword}
+          />
+
+          <TextFieldHint
+            text={
+              errors.confirmPassword && errors.confirmPassword.message
+                ? errors.confirmPassword.message
+                : ''
+            }
+          />
         </Box>
 
         <Button

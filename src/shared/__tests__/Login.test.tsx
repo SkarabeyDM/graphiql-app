@@ -1,7 +1,7 @@
 import store from '@shared/redux';
 import '@testing-library/jest-dom';
 import { act, fireEvent, render, screen } from '@testing-library/react';
-import LoginComponent from '@widgets/authorization/Login.component';
+import LoginComponent from '@widgets/authorization/Login/ui/Login';
 import { Provider } from 'react-redux';
 import userEvent from 'user-event';
 
