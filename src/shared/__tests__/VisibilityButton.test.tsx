@@ -1,6 +1,6 @@
 import '@testing-library/jest-dom';
 import { render, fireEvent } from '@testing-library/react';
-import { IconPassword } from '@widgets/authorization/IconPassword';
+import { VisibilityButton } from '@widgets/authorization';
 
 describe('IconPassword component', () => {
   it('should toggle password visibility when clicked', () => {
@@ -8,7 +8,7 @@ describe('IconPassword component', () => {
     const showPassword = true;
 
     const { getByRole } = render(
-      <IconPassword
+      <VisibilityButton
         setShowPassword={setShowPasswordMock}
         showPassword={showPassword}
       />,

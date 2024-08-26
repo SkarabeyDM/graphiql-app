@@ -2,24 +2,21 @@
 import { useState } from 'react';
 import { useForm } from 'react-hook-form';
 
+import { Button } from '@mui/material';
+import Box from '@mui/material/Box';
+import TextField from '@mui/material/TextField';
+
+import { logInWithEmailAndPassword } from '../model/firebase';
+import { IAuth } from '../model/authorization.model';
 import { useAppDispatch } from '@shared/hooks/hook';
 import { showAlert } from '@shared/redux/slices/alertSlice';
-
-import { registerWithEmailAndPassword } from '../../model/firebase';
-import { IAuth, IFormData } from '../../model/authorization.model';
 import { AlertStyle } from '@widgets/alert/model/Alert.model';
-
-import { Box, Button, TextField } from '@mui/material';
-
-import { regSchema } from '../../model/schema';
+import { logSchema } from '../model/schema';
 import { yupResolver } from '@hookform/resolvers/yup';
-import { IconPassword } from '@widgets/authorization/IconPassword';
-import { TextFieldHint } from '@widgets/authorization/TextFieldHint';
+import TextFieldHint from '@shared/ui/TextFieldHint';
+import VisibilityButton from './VisibilityButton';
 
-const RegistrationComponent = () => {
-  const [showPassword, setShowPassword] = useState(false);
-  const [showConfirmPassword, setShowConfirmPassword] = useState(false);
-
+const LoginComponent = () => {
   const dispatch = useAppDispatch();
 
   const {
@@ -29,17 +26,17 @@ const RegistrationComponent = () => {
     reset,
   } = useForm({
     mode: 'onChange',
-    resolver: yupResolver(regSchema),
+    resolver: yupResolver(logSchema),
   });
 
-  const userRegistration = async (data: IAuth) => {
-    const result = await registerWithEmailAndPassword(data);
+  const userLogin = async (data: IAuth) => {
+    const result = await logInWithEmailAndPassword(data);
     if (typeof result === 'boolean') {
       dispatch(
         showAlert({
           alert: true,
           style: AlertStyle.success,
-          alertText: 'Registration was successful',
+          alertText: 'Authorization was successful',
         }),
       );
       reset();
@@ -51,14 +48,15 @@ const RegistrationComponent = () => {
       );
   };
 
-  const onSubmit = async (data: IFormData) => {
-    const regData: IAuth = { email: data.email, password: data.password };
-    await userRegistration(regData);
+  const onSubmit = async (data: IAuth) => {
+    await userLogin(data);
   };
+
+  const [showPassword, setShowPassword] = useState(false);
 
   return (
     <Box display="flex" flexDirection="column">
-      <h2>Registration</h2>
+      <h2>Login</h2>
       <Box
         component="form"
         onSubmit={handleSubmit(onSubmit)}
@@ -94,7 +92,7 @@ const RegistrationComponent = () => {
             type={showPassword ? 'text' : 'password'}
             {...register('password', { onChange: () => null })}
           />
-          <IconPassword
+          <VisibilityButton
             setShowPassword={setShowPassword}
             showPassword={showPassword}
           />
@@ -107,40 +105,18 @@ const RegistrationComponent = () => {
             }
           />
         </Box>
-        <Box position="relative">
-          <TextField
-            fullWidth
-            id="confirmPassword"
-            label="Confirm password"
-            variant="filled"
-            type={showConfirmPassword ? 'text' : 'password'}
-            {...register('confirmPassword', { onChange: () => null })}
-          />
-          <IconPassword
-            setShowPassword={setShowConfirmPassword}
-            showPassword={showConfirmPassword}
-          />
-
-          <TextFieldHint
-            text={
-              errors.confirmPassword && errors.confirmPassword.message
-                ? errors.confirmPassword.message
-                : ''
-            }
-          />
-        </Box>
 
         <Button
-          data-testid="Registration"
+          data-testid="Login"
           disabled={!isValid}
           type="submit"
           variant="contained"
         >
-          Registration
+          Login
         </Button>
       </Box>
     </Box>
   );
 };
 
-export default RegistrationComponent;
+export default LoginComponent;

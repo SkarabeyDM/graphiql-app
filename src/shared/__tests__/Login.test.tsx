@@ -1,7 +1,7 @@
 import store from '@shared/redux';
 import '@testing-library/jest-dom';
 import { act, fireEvent, render, screen } from '@testing-library/react';
-import LoginComponent from '@widgets/authorization/Login/ui/Login';
+import { Login } from '@widgets/authorization';
 import { Provider } from 'react-redux';
 import userEvent from 'user-event';
 
@@ -9,7 +9,7 @@ describe('Login component', () => {
   beforeEach(() => {
     render(
       <Provider store={store}>
-        <LoginComponent />
+        <Login />
       </Provider>,
     );
   });

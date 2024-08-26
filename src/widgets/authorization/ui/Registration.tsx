@@ -2,21 +2,24 @@
 import { useState } from 'react';
 import { useForm } from 'react-hook-form';
 
-import { Button } from '@mui/material';
-import Box from '@mui/material/Box';
-import TextField from '@mui/material/TextField';
-
-import { logInWithEmailAndPassword } from '../../model/firebase';
-import { IAuth } from '../../model/authorization.model';
 import { useAppDispatch } from '@shared/hooks/hook';
 import { showAlert } from '@shared/redux/slices/alertSlice';
-import { AlertStyle } from '@widgets/alert/model/Alert.model';
-import { logSchema } from '../../model/schema';
-import { yupResolver } from '@hookform/resolvers/yup';
-import { IconPassword } from '@widgets/authorization/IconPassword';
-import { TextFieldHint } from '@widgets/authorization/TextFieldHint';
 
-const LoginComponent = () => {
+import { registerWithEmailAndPassword } from '../model/firebase';
+import { IAuth, IFormData } from '../model/authorization.model';
+import { AlertStyle } from '@widgets/alert/model/Alert.model';
+
+import { Box, Button, TextField } from '@mui/material';
+
+import { regSchema } from '../model/schema';
+import { yupResolver } from '@hookform/resolvers/yup';
+import TextFieldHint from '@shared/ui/TextFieldHint';
+import VisibilityButton from './VisibilityButton';
+
+const RegistrationComponent = () => {
+  const [showPassword, setShowPassword] = useState(false);
+  const [showConfirmPassword, setShowConfirmPassword] = useState(false);
+
   const dispatch = useAppDispatch();
 
   const {
@@ -26,17 +29,17 @@ const LoginComponent = () => {
     reset,
   } = useForm({
     mode: 'onChange',
-    resolver: yupResolver(logSchema),
+    resolver: yupResolver(regSchema),
   });
 
-  const userLogin = async (data: IAuth) => {
-    const result = await logInWithEmailAndPassword(data);
+  const userRegistration = async (data: IAuth) => {
+    const result = await registerWithEmailAndPassword(data);
     if (typeof result === 'boolean') {
       dispatch(
         showAlert({
           alert: true,
           style: AlertStyle.success,
-          alertText: 'Authorization was successful',
+          alertText: 'Registration was successful',
         }),
       );
       reset();
@@ -48,15 +51,14 @@ const LoginComponent = () => {
       );
   };
 
-  const onSubmit = async (data: IAuth) => {
-    await userLogin(data);
+  const onSubmit = async (data: IFormData) => {
+    const regData: IAuth = { email: data.email, password: data.password };
+    await userRegistration(regData);
   };
-
-  const [showPassword, setShowPassword] = useState(false);
 
   return (
     <Box display="flex" flexDirection="column">
-      <h2>Login</h2>
+      <h2>Registration</h2>
       <Box
         component="form"
         onSubmit={handleSubmit(onSubmit)}
@@ -92,7 +94,7 @@ const LoginComponent = () => {
             type={showPassword ? 'text' : 'password'}
             {...register('password', { onChange: () => null })}
           />
-          <IconPassword
+          <VisibilityButton
             setShowPassword={setShowPassword}
             showPassword={showPassword}
           />
@@ -105,18 +107,40 @@ const LoginComponent = () => {
             }
           />
         </Box>
+        <Box position="relative">
+          <TextField
+            fullWidth
+            id="confirmPassword"
+            label="Confirm password"
+            variant="filled"
+            type={showConfirmPassword ? 'text' : 'password'}
+            {...register('confirmPassword', { onChange: () => null })}
+          />
+          <VisibilityButton
+            setShowPassword={setShowConfirmPassword}
+            showPassword={showConfirmPassword}
+          />
+
+          <TextFieldHint
+            text={
+              errors.confirmPassword && errors.confirmPassword.message
+                ? errors.confirmPassword.message
+                : ''
+            }
+          />
+        </Box>
 
         <Button
-          data-testid="Login"
+          data-testid="Registration"
           disabled={!isValid}
           type="submit"
           variant="contained"
         >
-          Login
+          Registration
         </Button>
       </Box>
     </Box>
   );
 };
 
-export default LoginComponent;
+export default RegistrationComponent;

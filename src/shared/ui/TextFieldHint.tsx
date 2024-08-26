@@ -5,7 +5,6 @@ const TextFieldHint = (props: { text: string }) => {
 
   return (
     <Box
-      component="div"
       position="absolute"
       left="0"
       bottom="-1.1em"

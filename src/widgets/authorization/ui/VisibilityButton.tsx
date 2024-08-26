@@ -2,7 +2,7 @@ import { Visibility, VisibilityOff } from '@mui/icons-material';
 import { IconButton } from '@mui/material';
 import { IIconPassword } from '@widgets/authorization/model/authorization.model';
 
-const IconPassword = (props: IIconPassword) => {
+const VisibilityButton = (props: IIconPassword) => {
   const { showPassword, setShowPassword } = props;
 
   return (
@@ -20,4 +20,4 @@ const IconPassword = (props: IIconPassword) => {
   );
 };
 
-export default IconPassword;
+export default VisibilityButton;
