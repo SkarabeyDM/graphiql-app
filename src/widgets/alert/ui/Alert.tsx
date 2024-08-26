@@ -1,6 +1,6 @@
 'use client';
 import { Alert, Box } from '@mui/material';
-import { useAppSelector, useAppDispatch } from '../../shared/redux/hook';
+import { useAppDispatch, useAppSelector } from '@shared/hooks/hook';
 import { hideAlert } from '@shared/redux/slices/alertSlice';
 
 const AlertComponent = () => {
@@ -13,11 +13,10 @@ const AlertComponent = () => {
 
   return (
     <Box
-      component="div"
       position="absolute"
       top="0"
       right="0"
-      style={{
+      sx={{
         msTransitionDuration: '0.3s',
         opacity: alert.alertState.alert ? '1' : '0',
       }}
