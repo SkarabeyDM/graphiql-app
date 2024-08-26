@@ -1,7 +1,7 @@
 import store from '@shared/redux';
 import '@testing-library/jest-dom';
 import { act, fireEvent, render, screen } from '@testing-library/react';
-import { Logout } from '@widgets/authorization/Logout';
+import { Logout } from '@widgets/authorization';
 import { Provider } from 'react-redux';
 
 describe('Logout component', () => {

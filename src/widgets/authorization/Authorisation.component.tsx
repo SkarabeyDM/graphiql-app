@@ -5,9 +5,9 @@ import store from '@shared/redux';
 
 import { Box } from '@mui/material';
 import AlertComponent from '@widgets/alert/ui/Alert';
-import RegistrationComponent from './Registration/ui/Registration';
-import LoginComponent from './Login/ui/Login';
-import Logout from './Logout/ui/Logout';
+import RegistrationComponent from './ui/Registration';
+import LoginComponent from './ui/Login';
+import Logout from './ui/Logout';
 
 const AuthorizationComponent = () => {
   return (
