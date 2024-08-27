@@ -8,7 +8,7 @@ import TextField from '@mui/material/TextField';
 
 import { logInWithEmailAndPassword } from '../model/firebase';
 import { IAuth } from '../model/authorization.model';
-import { useAppDispatch } from '@shared/hooks/hook';
+import { useAppDispatch } from '@shared/redux';
 import { showAlert } from '@shared/redux/slices/alertSlice';
 import { AlertStyle } from '@widgets/alert/model/Alert.model';
 import { logSchema } from '../model/schema';
