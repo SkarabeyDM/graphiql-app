@@ -1,8 +1,8 @@
 import type { Metadata } from 'next';
 import { AppRouterCacheProvider } from '@mui/material-nextjs/v13-appRouter';
-
 import { Inter } from 'next/font/google';
 import { Box } from '@mui/material';
+import { StoreProvider } from '@shared/redux';
 
 const inter = Inter({ subsets: ['latin'] });
 
@@ -20,17 +20,21 @@ export const RootLayout = ({
   children: React.ReactNode;
 }>) => {
   return (
-    <Box component="html" height="100%" lang="en">
-      <Box
-        component="body"
-        m={0}
-        height="100%"
-        minHeight="100%"
-        className={inter.className}
-      >
-        <AppRouterCacheProvider>{children}</AppRouterCacheProvider>
-      </Box>
-    </Box>
+    <StoreProvider>
+      <AppRouterCacheProvider>
+        <Box component="html" height="100%" lang="en">
+          <Box
+            component="body"
+            m={0}
+            height="100%"
+            minHeight="100%"
+            className={inter.className}
+          >
+            {children}
+          </Box>
+        </Box>
+      </AppRouterCacheProvider>
+    </StoreProvider>
   );
 };
 
