@@ -1,17 +1,12 @@
-import store from '@shared/redux';
 import '@testing-library/jest-dom';
-import { act, fireEvent, render, screen } from '@testing-library/react';
+import { act, fireEvent, screen } from '@testing-library/react';
 import { Registration } from '@widgets/authorization';
-import { Provider } from 'react-redux';
 import userEvent from 'user-event';
+import { renderWithProviders } from '../lib';
 
 describe('Registration component', () => {
   beforeEach(() => {
-    render(
-      <Provider store={store}>
-        <Registration />
-      </Provider>,
-    );
+    renderWithProviders(<Registration />);
   });
 
   it('renders with inclide the title', () => {

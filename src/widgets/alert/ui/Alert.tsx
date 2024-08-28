@@ -1,7 +1,7 @@
 'use client';
 import { MutableRefObject, useEffect, useRef } from 'react';
 import { Alert, Box } from '@mui/material';
-import { useAppDispatch, useAppSelector } from '@shared/hooks/hook';
+import { useAppDispatch, useAppSelector } from '@shared/redux';
 import { hideAlert } from '@shared/redux/slices/alertSlice';
 
 const AlertComponent = () => {

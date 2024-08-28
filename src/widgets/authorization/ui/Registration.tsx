@@ -2,7 +2,7 @@
 import { useState } from 'react';
 import { useForm } from 'react-hook-form';
 
-import { useAppDispatch } from '@shared/hooks/hook';
+import { useAppDispatch } from '@shared/redux';
 import { showAlert } from '@shared/redux/slices/alertSlice';
 
 import { registerWithEmailAndPassword } from '../model/firebase';
