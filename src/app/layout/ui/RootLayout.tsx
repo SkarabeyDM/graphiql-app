@@ -3,6 +3,7 @@ import { AppRouterCacheProvider } from '@mui/material-nextjs/v13-appRouter';
 import { Inter } from 'next/font/google';
 import { Box } from '@mui/material';
 import { StoreProvider } from '@shared/redux';
+import AlertComponent from '@widgets/alert/ui/Alert';
 
 const inter = Inter({ subsets: ['latin'] });
 
@@ -30,6 +31,7 @@ export const RootLayout = ({
             minHeight="100%"
             className={inter.className}
           >
+            <AlertComponent />
             {children}
           </Box>
         </Box>
