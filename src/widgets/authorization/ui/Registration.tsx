@@ -5,8 +5,8 @@ import { useForm } from 'react-hook-form';
 import { useAppDispatch } from '@shared/redux';
 import { showAlert } from '@shared/redux/slices/alertSlice';
 
-import { registerWithEmailAndPassword } from '../model/firebase';
-import { IAuth, IFormData } from '../model/authorization.model';
+import { registerWithEmailAndPassword } from '@shared/model/firebase';
+import { IAuth, IFormData } from '@shared/model/firebase';
 import { AlertStyle } from '@widgets/alert/model/Alert.model';
 
 import { Box, Button, TextField } from '@mui/material';

@@ -6,8 +6,8 @@ import { Button } from '@mui/material';
 import Box from '@mui/material/Box';
 import TextField from '@mui/material/TextField';
 
-import { logInWithEmailAndPassword } from '../model/firebase';
-import { IAuth } from '../model/authorization.model';
+import { logInWithEmailAndPassword } from '@shared/model/firebase';
+import { IAuth } from '@shared/model/firebase';
 import { useAppDispatch } from '@shared/redux';
 import { showAlert } from '@shared/redux/slices/alertSlice';
 import { AlertStyle } from '@widgets/alert/model/Alert.model';

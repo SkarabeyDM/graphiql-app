@@ -1,5 +1,5 @@
 import { Button } from '@mui/material';
-import { logout } from '../model/firebase';
+import { logout } from '@shared/model/firebase';
 import { useAppDispatch } from '@shared/redux';
 import { showAlert } from '@shared/redux/slices/alertSlice';
 import { AlertStyle } from '@widgets/alert/model/Alert.model';

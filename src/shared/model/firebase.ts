@@ -6,7 +6,15 @@ import {
   signOut,
 } from 'firebase/auth';
 import { getFirestore, collection, addDoc } from 'firebase/firestore';
-import { IAuth } from './authorization.model';
+
+export interface IAuth {
+  email: string;
+  password: string;
+}
+
+export interface IFormData extends IAuth {
+  confirmPassword: string;
+}
 
 const firebaseConfig = {
   apiKey: 'AIzaSyC7IKge1Z-UxaJg5QMTTWHY2vKcbYbJmOQ',
