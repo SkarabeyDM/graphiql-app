@@ -1,31 +1,25 @@
+import { LogoutButton } from '@features/auth';
 import { Typography } from '@mui/material';
 import Grid from '@mui/material/Unstable_Grid2';
-import AuthorizationComponent from '@widgets/authorization/Authorisation.component';
 
-const HomePageComponent = () => {
+export const HomePage = () => {
   return (
     <Grid
       container
       direction="column"
       justifyContent="center"
       alignItems="center"
-      minHeight="100%"
+      minHeight="100vh"
       width="100%"
       spacing={4}
-      bgcolor="pink"
-      m={0}
-      position="relative"
+      sx={{ m: 0, position: 'relative' }}
     >
       <Grid>
         <Typography variant="h4" fontWeight="bold" fontStyle="italic">
           REST/GraphiQL Client
         </Typography>
-      </Grid>
-      <Grid>
-        <AuthorizationComponent />
+        <LogoutButton />
       </Grid>
     </Grid>
   );
 };
-
-export default HomePageComponent;
