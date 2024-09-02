@@ -6,6 +6,7 @@ import {
   signOut,
 } from 'firebase/auth';
 import { getFirestore, collection, addDoc } from 'firebase/firestore';
+import { useAuthState as useAuthStateHook } from 'react-firebase-hooks/auth';
 
 export interface IAuth {
   email: string;
@@ -72,6 +73,8 @@ const registerWithEmailAndPassword: (
 const logout: () => void = () => {
   signOut(auth);
 };
+
+export const useAuthState = () => useAuthStateHook(auth);
 
 export {
   auth,
