@@ -18,6 +18,7 @@ export const PasswordInput = ({
   return (
     <TextField
       fullWidth
+      variant="outlined"
       label="Password"
       type={showPassword ? 'text' : 'password'}
       id="password"

@@ -11,7 +11,7 @@ import { showAlert } from '@shared/redux/slices/alertSlice';
 import { AlertStyle } from '@widgets/alert/model/Alert.model';
 import { logSchema } from '../model/schema';
 import { yupResolver } from '@hookform/resolvers/yup';
-import { Form, PasswordInput } from '@shared/ui';
+import { Form, Link, PasswordInput } from '@shared/ui';
 import { Login } from '@mui/icons-material';
 
 export const LoginForm = () => {
@@ -55,12 +55,12 @@ export const LoginForm = () => {
   };
 
   return (
-    <Form onSubmit={handleSubmit(onSubmit)} title="Login">
+    <Form onSubmit={handleSubmit(onSubmit)} title="Sign In">
       <TextField
         fullWidth
         id="email"
         label="Email"
-        variant="filled"
+        variant="outlined"
         error={!!errors.email}
         helperText={errors.email && errors.email.message}
         {...register('email')}
@@ -76,10 +76,14 @@ export const LoginForm = () => {
         disabled={!isValid}
         type="submit"
         variant="contained"
+        fullWidth
         startIcon={<Login />}
       >
-        Login
+        Sign In
       </Button>
+      <Link alignSelf="flex-end" href="/register" underline="none">
+        Sign Up
+      </Link>
     </Form>
   );
 };

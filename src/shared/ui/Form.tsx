@@ -18,9 +18,15 @@ export const Form = ({
       flexDirection="column"
       noValidate
       autoComplete="off"
+      border={1}
+      borderColor={({ palette }) => palette.text.disabled}
+      padding={6}
+      borderRadius={2}
+      width={550}
+      maxWidth="100%"
       {...props}
     >
-      <Typography variant="h4" fontWeight="bold">
+      <Typography variant="h4" paddingBottom={2}>
         {title}
       </Typography>
       {children}

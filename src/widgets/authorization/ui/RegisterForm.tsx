@@ -15,7 +15,7 @@ import { Button, TextField } from '@mui/material';
 
 import { regSchema } from '../model/schema';
 import { yupResolver } from '@hookform/resolvers/yup';
-import { Form, PasswordInput } from '@shared/ui';
+import { Form, Link, PasswordInput } from '@shared/ui';
 import { Create } from '@mui/icons-material';
 
 export const RegisterForm = () => {
@@ -62,12 +62,12 @@ export const RegisterForm = () => {
   };
 
   return (
-    <Form onSubmit={handleSubmit(onSubmit)} title="Registration">
+    <Form onSubmit={handleSubmit(onSubmit)} title="Sign Up">
       <TextField
         fullWidth
         id="email"
         label="Email"
-        variant="filled"
+        variant="outlined"
         error={!!errors.email}
         helperText={errors.email?.message}
         {...register('email')}
@@ -88,11 +88,15 @@ export const RegisterForm = () => {
         data-testid="registration-button"
         disabled={!isValid}
         type="submit"
+        fullWidth
         variant="contained"
         startIcon={<Create />}
       >
-        Registration
+        Sign Up
       </Button>
+      <Link alignSelf="flex-end" href="/login" underline="none">
+        Sign In
+      </Link>
     </Form>
   );
 };
