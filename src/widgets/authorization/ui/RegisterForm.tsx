@@ -11,11 +11,11 @@ import {
 } from '@entities/user/model/firebase';
 import { AlertStyle } from '@widgets/alert/model/Alert.model';
 
-import { Box, Button, TextField, Typography } from '@mui/material';
+import { Button, TextField } from '@mui/material';
 
 import { regSchema } from '../model/schema';
 import { yupResolver } from '@hookform/resolvers/yup';
-import { PasswordInput } from '@shared/ui';
+import { Form, PasswordInput } from '@shared/ui';
 
 export const RegisterForm = () => {
   const dispatch = useAppDispatch();
@@ -61,48 +61,35 @@ export const RegisterForm = () => {
   };
 
   return (
-    <Box display="flex" flexDirection="column">
-      <Typography variant="h2">Registration</Typography>
-      <Box
-        component="form"
-        onSubmit={handleSubmit(onSubmit)}
-        sx={{
-          '& > :not(style)': { m: 1, width: '25ch' },
-        }}
-        display="flex"
-        flexDirection="column"
-        noValidate
-        autoComplete="off"
-      >
-        <TextField
-          fullWidth
-          id="email"
-          label="Email"
-          variant="filled"
-          error={!!errors.email}
-          helperText={errors.email?.message}
-          {...register('email')}
-        />
-        <PasswordInput
-          error={!!errors.password}
-          helperText={errors.password?.message}
-          inputProps={{ ...register('password') }}
-        />
-        <PasswordInput
-          error={!!errors.confirmPassword}
-          helperText={errors.confirmPassword?.message}
-          inputProps={{ ...register('confirmPassword') }}
-        />
+    <Form onSubmit={handleSubmit(onSubmit)} title="Registration">
+      <TextField
+        fullWidth
+        id="email"
+        label="Email"
+        variant="filled"
+        error={!!errors.email}
+        helperText={errors.email?.message}
+        {...register('email')}
+      />
+      <PasswordInput
+        error={!!errors.password}
+        helperText={errors.password?.message}
+        inputProps={{ ...register('password') }}
+      />
+      <PasswordInput
+        error={!!errors.confirmPassword}
+        helperText={errors.confirmPassword?.message}
+        inputProps={{ ...register('confirmPassword') }}
+      />
 
-        <Button
-          data-testid="registration-button"
-          disabled={!isValid}
-          type="submit"
-          variant="contained"
-        >
-          Registration
-        </Button>
-      </Box>
-    </Box>
+      <Button
+        data-testid="registration-button"
+        disabled={!isValid}
+        type="submit"
+        variant="contained"
+      >
+        Registration
+      </Button>
+    </Form>
   );
 };
