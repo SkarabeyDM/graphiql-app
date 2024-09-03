@@ -35,7 +35,7 @@ describe('Registration component', () => {
   });
 
   it('renders with the Registration button', () => {
-    const button = screen.getByTestId('Registration');
+    const button = screen.getByTestId('registration-button');
     expect(button).toBeInTheDocument();
 
     act(() => {

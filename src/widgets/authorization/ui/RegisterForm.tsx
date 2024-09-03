@@ -1,5 +1,4 @@
 'use client';
-import { useState } from 'react';
 import { useForm } from 'react-hook-form';
 
 import { useAppDispatch } from '@shared/redux';
@@ -12,17 +11,13 @@ import {
 } from '@entities/user/model/firebase';
 import { AlertStyle } from '@widgets/alert/model/Alert.model';
 
-import { Box, Button, TextField } from '@mui/material';
+import { Box, Button, TextField, Typography } from '@mui/material';
 
 import { regSchema } from '../model/schema';
 import { yupResolver } from '@hookform/resolvers/yup';
-import TextFieldHint from '@shared/ui/TextFieldHint';
-import { VisibilityButton } from './VisibilityButton';
+import { PasswordInput } from '@shared/ui';
 
 export const RegisterForm = () => {
-  const [showPassword, setShowPassword] = useState(false);
-  const [showConfirmPassword, setShowConfirmPassword] = useState(false);
-
   const dispatch = useAppDispatch();
 
   const {
@@ -35,9 +30,11 @@ export const RegisterForm = () => {
     resolver: yupResolver(regSchema),
   });
 
-  const userRegistration = async (data: IAuth) => {
-    const result = await registerWithEmailAndPassword(data);
-    if (typeof result === 'boolean') {
+  const handleRegister = async (registrationData: IAuth) => {
+    const registrationResult =
+      await registerWithEmailAndPassword(registrationData);
+
+    if (typeof registrationResult === 'boolean') {
       dispatch(
         showAlert({
           alert: true,
@@ -46,22 +43,26 @@ export const RegisterForm = () => {
         }),
       );
       reset();
-
-      // TODO  navigation or other state change !!
-    } else
+    } else {
       dispatch(
-        showAlert({ alert: true, style: AlertStyle.error, alertText: result }),
+        showAlert({
+          alert: true,
+          style: AlertStyle.error,
+          alertText: registrationResult,
+        }),
       );
+    }
   };
 
-  const onSubmit = async (data: IFormData) => {
-    const regData: IAuth = { email: data.email, password: data.password };
-    await userRegistration(regData);
+  const onSubmit = async (registerData: IFormData) => {
+    const { email, password } = registerData;
+    const regData: IAuth = { email, password };
+    await handleRegister(regData);
   };
 
   return (
     <Box display="flex" flexDirection="column">
-      <h2>Registration</h2>
+      <Typography variant="h2">Registration</Typography>
       <Box
         component="form"
         onSubmit={handleSubmit(onSubmit)}
@@ -73,68 +74,28 @@ export const RegisterForm = () => {
         noValidate
         autoComplete="off"
       >
-        <Box position="relative">
-          <TextField
-            fullWidth
-            id="email"
-            label="Email"
-            variant="filled"
-            {...register('email', { onChange: () => null })}
-          />
-
-          <TextFieldHint
-            text={
-              errors.email && errors.email.message ? errors.email.message : ''
-            }
-          />
-        </Box>
-        <Box position="relative">
-          <TextField
-            fullWidth
-            id="password"
-            label="Password"
-            variant="filled"
-            type={showPassword ? 'text' : 'password'}
-            {...register('password', { onChange: () => null })}
-          />
-          <VisibilityButton
-            setShowPassword={setShowPassword}
-            showPassword={showPassword}
-          />
-
-          <TextFieldHint
-            text={
-              errors.password && errors.password.message
-                ? errors.password.message
-                : ''
-            }
-          />
-        </Box>
-        <Box position="relative">
-          <TextField
-            fullWidth
-            id="confirmPassword"
-            label="Confirm password"
-            variant="filled"
-            type={showConfirmPassword ? 'text' : 'password'}
-            {...register('confirmPassword', { onChange: () => null })}
-          />
-          <VisibilityButton
-            setShowPassword={setShowConfirmPassword}
-            showPassword={showConfirmPassword}
-          />
-
-          <TextFieldHint
-            text={
-              errors.confirmPassword && errors.confirmPassword.message
-                ? errors.confirmPassword.message
-                : ''
-            }
-          />
-        </Box>
+        <TextField
+          fullWidth
+          id="email"
+          label="Email"
+          variant="filled"
+          error={!!errors.email}
+          helperText={errors.email?.message}
+          {...register('email')}
+        />
+        <PasswordInput
+          error={!!errors.password}
+          helperText={errors.password?.message}
+          inputProps={{ ...register('password') }}
+        />
+        <PasswordInput
+          error={!!errors.confirmPassword}
+          helperText={errors.confirmPassword?.message}
+          inputProps={{ ...register('confirmPassword') }}
+        />
 
         <Button
-          data-testid="Registration"
+          data-testid="registration-button"
           disabled={!isValid}
           type="submit"
           variant="contained"

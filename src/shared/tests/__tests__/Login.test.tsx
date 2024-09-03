@@ -35,7 +35,7 @@ describe('Login component', () => {
   });
 
   it('renders with the Login button', () => {
-    const button = screen.getByTestId('Login');
+    const button = screen.getByTestId('login-button');
     expect(button).toBeInTheDocument();
 
     act(() => {

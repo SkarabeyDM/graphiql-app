@@ -1,5 +1,4 @@
 'use client';
-import { useState } from 'react';
 import { useForm } from 'react-hook-form';
 
 import { Button } from '@mui/material';
@@ -13,8 +12,7 @@ import { showAlert } from '@shared/redux/slices/alertSlice';
 import { AlertStyle } from '@widgets/alert/model/Alert.model';
 import { logSchema } from '../model/schema';
 import { yupResolver } from '@hookform/resolvers/yup';
-import TextFieldHint from '@shared/ui/TextFieldHint';
-import { VisibilityButton } from './VisibilityButton';
+import { PasswordInput } from '@shared/ui';
 
 export const LoginForm = () => {
   const dispatch = useAppDispatch();
@@ -29,9 +27,10 @@ export const LoginForm = () => {
     resolver: yupResolver(logSchema),
   });
 
-  const userLogin = async (data: IAuth) => {
-    const result = await logInWithEmailAndPassword(data);
-    if (typeof result === 'boolean') {
+  const handleLogin = async (credentials: IAuth) => {
+    const loginResult = await logInWithEmailAndPassword(credentials);
+
+    if (typeof loginResult === 'boolean') {
       dispatch(
         showAlert({
           alert: true,
@@ -40,19 +39,20 @@ export const LoginForm = () => {
         }),
       );
       reset();
-
-      // TODO  navigation or other state change !!
-    } else
+    } else {
       dispatch(
-        showAlert({ alert: true, style: AlertStyle.error, alertText: result }),
+        showAlert({
+          alert: true,
+          style: AlertStyle.error,
+          alertText: loginResult,
+        }),
       );
+    }
   };
 
-  const onSubmit = async (data: IAuth) => {
-    await userLogin(data);
+  const onSubmit = async (authData: IAuth) => {
+    await handleLogin(authData);
   };
-
-  const [showPassword, setShowPassword] = useState(false);
 
   return (
     <Box display="flex" flexDirection="column">
@@ -68,46 +68,23 @@ export const LoginForm = () => {
         noValidate
         autoComplete="off"
       >
-        <Box position="relative">
-          <TextField
-            fullWidth
-            id="email"
-            label="Email"
-            variant="filled"
-            {...register('email', { onChange: () => null })}
-          />
-
-          <TextFieldHint
-            text={
-              errors.email && errors.email.message ? errors.email.message : ''
-            }
-          />
-        </Box>
-        <Box position="relative">
-          <TextField
-            fullWidth
-            id="password"
-            label="Password"
-            variant="filled"
-            type={showPassword ? 'text' : 'password'}
-            {...register('password', { onChange: () => null })}
-          />
-          <VisibilityButton
-            setShowPassword={setShowPassword}
-            showPassword={showPassword}
-          />
-
-          <TextFieldHint
-            text={
-              errors.password && errors.password.message
-                ? errors.password.message
-                : ''
-            }
-          />
-        </Box>
+        <TextField
+          fullWidth
+          id="email"
+          label="Email"
+          variant="filled"
+          error={!!errors.email}
+          helperText={errors.email && errors.email.message}
+          {...register('email')}
+        />
+        <PasswordInput
+          error={!!errors.password}
+          helperText={errors.password && errors.password.message}
+          inputProps={{ ...register('password') }}
+        />
 
         <Button
-          data-testid="Login"
+          data-testid="login-button"
           disabled={!isValid}
           type="submit"
           variant="contained"
