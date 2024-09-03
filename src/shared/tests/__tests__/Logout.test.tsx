@@ -1,13 +1,13 @@
 import '@testing-library/jest-dom';
 import { act, fireEvent, screen } from '@testing-library/react';
-import { Logout } from '@widgets/authorization';
 import { renderWithProviders } from '../lib';
+import { LogoutButton } from '@features/auth';
 
 describe('Logout component', () => {
   it('renders with the Logout button', () => {
-    renderWithProviders(<Logout />);
+    renderWithProviders(<LogoutButton />);
 
-    const button = screen.getByTestId('Logout');
+    const button = screen.getByTestId('logout-button');
     expect(button).toBeInTheDocument();
 
     act(() => {
