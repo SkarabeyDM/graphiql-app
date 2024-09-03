@@ -80,6 +80,7 @@ export const RegisterForm = () => {
       <PasswordInput
         error={!!errors.confirmPassword}
         helperText={errors.confirmPassword?.message}
+        label="Confirm password"
         id="confirm-password"
         inputProps={{ ...register('confirmPassword') }}
       />

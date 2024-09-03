@@ -10,7 +10,7 @@ describe('Registration component', () => {
   });
 
   it('renders with inclide the title', () => {
-    const title = screen.getByRole('heading', { name: 'Registration' });
+    const title = screen.getByRole('heading', { name: 'Sign Up' });
     expect(title).toBeInTheDocument();
   });
 

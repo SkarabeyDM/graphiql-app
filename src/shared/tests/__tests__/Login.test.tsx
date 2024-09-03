@@ -10,7 +10,7 @@ describe('Login component', () => {
   });
 
   it('renders with inclide the title', () => {
-    const title = screen.getByRole('heading', { name: 'Login' });
+    const title = screen.getByRole('heading', { name: 'Sign In' });
     expect(title).toBeInTheDocument();
   });
 
