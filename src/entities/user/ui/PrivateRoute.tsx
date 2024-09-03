@@ -1,5 +1,5 @@
 'use client';
-import { useAuthState } from '@shared/model/firebase';
+import { useAuthState } from '../model/firebase';
 import { redirect } from 'next/navigation';
 
 export interface PrivateRouteProps {
@@ -8,7 +8,7 @@ export interface PrivateRouteProps {
   /** If `true`, the component will be rendered only if the user is authenticated. @default false. */
   requireAuth?: boolean;
   loadingFallback?: React.ReactNode;
-  children?: React.ReactNode;
+  children: React.ReactNode;
 }
 
 export const PrivateRoute = ({
