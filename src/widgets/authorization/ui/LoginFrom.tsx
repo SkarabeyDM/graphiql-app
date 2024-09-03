@@ -6,17 +6,17 @@ import { Button } from '@mui/material';
 import Box from '@mui/material/Box';
 import TextField from '@mui/material/TextField';
 
-import { logInWithEmailAndPassword } from '@shared/model/firebase';
-import { IAuth } from '@shared/model/firebase';
+import { logInWithEmailAndPassword } from '@entities/user/model/firebase';
+import { IAuth } from '@entities/user/model/firebase';
 import { useAppDispatch } from '@shared/redux';
 import { showAlert } from '@shared/redux/slices/alertSlice';
 import { AlertStyle } from '@widgets/alert/model/Alert.model';
 import { logSchema } from '../model/schema';
 import { yupResolver } from '@hookform/resolvers/yup';
 import TextFieldHint from '@shared/ui/TextFieldHint';
-import VisibilityButton from './VisibilityButton';
+import { VisibilityButton } from './VisibilityButton';
 
-const LoginComponent = () => {
+export const LoginForm = () => {
   const dispatch = useAppDispatch();
 
   const {
@@ -118,5 +118,3 @@ const LoginComponent = () => {
     </Box>
   );
 };
-
-export default LoginComponent;

@@ -1,13 +1,15 @@
-import { Button } from '@mui/material';
-import { logout } from '@shared/model/firebase';
+'use client';
+import { Button, ButtonProps } from '@mui/material';
+import { logout, useAuthState } from '@entities/user/model/firebase';
 import { useAppDispatch } from '@shared/redux';
 import { showAlert } from '@shared/redux/slices/alertSlice';
 import { AlertStyle } from '@widgets/alert/model/Alert.model';
 
-const Logout = () => {
+export const LogoutButton = (props: ButtonProps) => {
   const dispatch = useAppDispatch();
+  const [user, loading] = useAuthState();
 
-  const userLogout = () => {
+  const logoutUser = () => {
     logout();
     dispatch(
       showAlert({
@@ -16,15 +18,16 @@ const Logout = () => {
         alertText: 'User logged out',
       }),
     );
-
-    // TODO  navigation or other state change !!
   };
 
   return (
-    <Button data-testid="Logout" onClick={userLogout} variant="contained">
+    <Button
+      variant="contained"
+      onClick={logoutUser}
+      disabled={loading || !user}
+      {...props}
+    >
       Logout
     </Button>
   );
 };
-
-export default Logout;

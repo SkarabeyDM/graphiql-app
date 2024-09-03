@@ -5,8 +5,11 @@ import { useForm } from 'react-hook-form';
 import { useAppDispatch } from '@shared/redux';
 import { showAlert } from '@shared/redux/slices/alertSlice';
 
-import { registerWithEmailAndPassword } from '@shared/model/firebase';
-import { IAuth, IFormData } from '@shared/model/firebase';
+import {
+  IAuth,
+  IFormData,
+  registerWithEmailAndPassword,
+} from '@entities/user/model/firebase';
 import { AlertStyle } from '@widgets/alert/model/Alert.model';
 
 import { Box, Button, TextField } from '@mui/material';
@@ -14,9 +17,9 @@ import { Box, Button, TextField } from '@mui/material';
 import { regSchema } from '../model/schema';
 import { yupResolver } from '@hookform/resolvers/yup';
 import TextFieldHint from '@shared/ui/TextFieldHint';
-import VisibilityButton from './VisibilityButton';
+import { VisibilityButton } from './VisibilityButton';
 
-const RegistrationComponent = () => {
+export const RegisterForm = () => {
   const [showPassword, setShowPassword] = useState(false);
   const [showConfirmPassword, setShowConfirmPassword] = useState(false);
 
@@ -142,5 +145,3 @@ const RegistrationComponent = () => {
     </Box>
   );
 };
-
-export default RegistrationComponent;
