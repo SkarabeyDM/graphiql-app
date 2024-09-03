@@ -1,12 +1,12 @@
 import '@testing-library/jest-dom';
 import { act, fireEvent, screen } from '@testing-library/react';
-import { Login } from '@widgets/authorization';
+import { LoginForm } from '@widgets/authorization';
 import userEvent from 'user-event';
 import { renderWithProviders } from '../lib';
 
 describe('Login component', () => {
   beforeEach(() => {
-    renderWithProviders(<Login />);
+    renderWithProviders(<LoginForm />);
   });
 
   it('renders with inclide the title', () => {

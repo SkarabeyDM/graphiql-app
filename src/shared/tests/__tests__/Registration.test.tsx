@@ -1,12 +1,12 @@
 import '@testing-library/jest-dom';
 import { act, fireEvent, screen } from '@testing-library/react';
-import { Registration } from '@widgets/authorization';
 import userEvent from 'user-event';
 import { renderWithProviders } from '../lib';
+import { RegisterForm } from '@widgets/authorization';
 
 describe('Registration component', () => {
   beforeEach(() => {
-    renderWithProviders(<Registration />);
+    renderWithProviders(<RegisterForm />);
   });
 
   it('renders with inclide the title', () => {
