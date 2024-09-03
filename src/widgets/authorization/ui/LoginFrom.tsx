@@ -54,7 +54,7 @@ export const LoginForm = () => {
   };
 
   return (
-    <Form onSubmit={handleSubmit(onSubmit)} title="Registration">
+    <Form onSubmit={handleSubmit(onSubmit)} title="Login">
       <TextField
         fullWidth
         id="email"
