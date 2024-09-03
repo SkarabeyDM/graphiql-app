@@ -12,6 +12,7 @@ import { AlertStyle } from '@widgets/alert/model/Alert.model';
 import { logSchema } from '../model/schema';
 import { yupResolver } from '@hookform/resolvers/yup';
 import { Form, PasswordInput } from '@shared/ui';
+import { Login } from '@mui/icons-material';
 
 export const LoginForm = () => {
   const dispatch = useAppDispatch();
@@ -75,6 +76,7 @@ export const LoginForm = () => {
         disabled={!isValid}
         type="submit"
         variant="contained"
+        startIcon={<Login />}
       >
         Login
       </Button>

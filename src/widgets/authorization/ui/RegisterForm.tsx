@@ -16,6 +16,7 @@ import { Button, TextField } from '@mui/material';
 import { regSchema } from '../model/schema';
 import { yupResolver } from '@hookform/resolvers/yup';
 import { Form, PasswordInput } from '@shared/ui';
+import { Create } from '@mui/icons-material';
 
 export const RegisterForm = () => {
   const dispatch = useAppDispatch();
@@ -87,6 +88,7 @@ export const RegisterForm = () => {
         disabled={!isValid}
         type="submit"
         variant="contained"
+        startIcon={<Create />}
       >
         Registration
       </Button>
