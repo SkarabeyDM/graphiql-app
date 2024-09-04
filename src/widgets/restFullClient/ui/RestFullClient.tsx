@@ -7,8 +7,8 @@ import HeaderManager from './HeaderManager';
 import BodyManager from './BodyManager';
 
 import { ICRUD } from '../model/methodManagerModel';
-import { IHeaderData } from '../model/headerManagerModel';
 import { IBodyData } from '../model/bodyManagerModel';
+import { IHeaderData } from '../model/headerManagerModel';
 
 const RestFullClient = () => {
   const [method, setMethod] = useState<ICRUD>(ICRUD.GET);

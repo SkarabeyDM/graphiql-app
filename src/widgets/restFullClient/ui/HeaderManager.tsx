@@ -1,82 +1,52 @@
-import * as yup from 'yup';
-import { yupResolver } from '@hookform/resolvers/yup';
+import { useState, useEffect } from 'react';
 
-import { useForm } from 'react-hook-form';
-import { Box, Button, TextField } from '@mui/material';
-import { IHeaderData, IHeaderProps } from '../model/headerManagerModel';
-import TextFieldHint from '@shared/ui/TextFieldHint';
+import { Box, Button } from '@mui/material';
+import OneHeaderElement from './OneHeaderElement';
+import {
+  IHeaderData,
+  IHeaderItem,
+  IheadersProps,
+} from '../model/headerManagerModel';
 
-const HeaderManager = (props: IHeaderProps) => {
+const HeaderManager = (props: IheadersProps) => {
   const { setHeaders } = props;
 
-  const headerSchema = yup.object().shape({
-    key: yup.string().required('This field is required'),
-    value: yup.string().required('This field is required'),
-  });
+  const [count, setCount] = useState<number>(1);
+  const [items, setItems] = useState<IHeaderItem[]>([]);
 
-  const {
-    register,
-    formState: { isValid, errors },
-    handleSubmit,
-    reset,
-  } = useForm({
-    mode: 'onChange',
-    resolver: yupResolver(headerSchema),
-  });
-
-  const onSubmit = (data: IHeaderData) => {
-    if (data) {
-      setHeaders((prev: IHeaderData) => ({ ...prev, [data.key]: data.value }));
-    }
-
-    reset();
+  const createHeader = () => {
+    const item: IHeaderItem = { id: count, data: { key: '', value: '' } };
+    setItems((prev) => [...prev, item]);
+    setCount((prev) => prev + 1);
   };
 
+  useEffect(() => {
+    createHeader();
+  }, []);
+
+  useEffect(() => {
+    const newHeaders: IHeaderData = items.reduce(
+      (object: IHeaderData, el: IHeaderItem) => {
+        return { ...object, [el.data.key]: el.data.value };
+      },
+      {},
+    );
+    setHeaders(newHeaders);
+  }, [items]);
+
   return (
-    <Box
-      onSubmit={handleSubmit(onSubmit)}
-      component="form"
-      sx={{
-        '& > :not(style)': { m: 1 },
-      }}
-    >
+    <Box>
       <Button
-        data-testid="Login"
-        disabled={!isValid}
-        type="submit"
+        onClick={createHeader}
+        data-testid="Create Header"
         variant="contained"
       >
-        Add Header
+        Create Header
       </Button>
-      <Box display="flex" justifyContent="space-between" gap="0.2em">
-        <Box position="relative">
-          <TextField
-            fullWidth
-            id="key"
-            label="Key"
-            variant="outlined"
-            {...register('key', { onChange: () => null })}
-          />
-
-          <TextFieldHint
-            text={errors.key && errors.key.message ? errors.key.message : ''}
-          />
-        </Box>
-        <Box position="relative">
-          <TextField
-            fullWidth
-            id="value"
-            label="Value"
-            variant="outlined"
-            {...register('value', { onChange: () => null })}
-          />
-
-          <TextFieldHint
-            text={
-              errors.value && errors.value.message ? errors.value.message : ''
-            }
-          />
-        </Box>
+      <Box margin="0.5em 0">
+        {items.map((el: IHeaderItem) => (
+          <OneHeaderElement key={el.id} id={el.id} setItems={setItems} />
+        ))}
       </Box>
     </Box>
   );
