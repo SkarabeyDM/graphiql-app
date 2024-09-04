@@ -1,6 +1,6 @@
 import { Typography } from '@mui/material';
 import Grid from '@mui/material/Unstable_Grid2';
-import AuthorizationComponent from '@widgets/authorization/Authorisation.component';
+import { RestFullClient } from '@widgets/restFullClient';
 
 const HomePageComponent = () => {
   return (
@@ -22,7 +22,7 @@ const HomePageComponent = () => {
         </Typography>
       </Grid>
       <Grid>
-        <AuthorizationComponent />
+        <RestFullClient />
       </Grid>
     </Grid>
   );
