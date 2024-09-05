@@ -13,8 +13,13 @@ import { IRequestData } from '../model/requestHandlerModel';
 import { sendRequest } from '../model/requestHandler';
 import { AxiosResponse } from 'axios';
 import UrlManager from './UrlManager';
+import { useAppDispatch } from '@shared/redux';
+import { showAlert } from '@shared/redux/slices/alertSlice';
+import { AlertStyle } from '@widgets/alert/model/Alert.model';
 
 const RestFullClient = () => {
+  const dispatch = useAppDispatch();
+
   const [method, setMethod] = useState<ICRUD>(ICRUD.GET);
   const [url, setUrl] = useState<string>('');
   const [headers, setHeaders] = useState<IHeaderData>({});
@@ -39,6 +44,21 @@ const RestFullClient = () => {
     };
 
     const response = await sendRequest(data);
+    response && response?.status < 300
+      ? dispatch(
+          showAlert({
+            alert: true,
+            style: AlertStyle.success,
+            alertText: 'Request completed successfully !',
+          }),
+        )
+      : dispatch(
+          showAlert({
+            alert: true,
+            style: AlertStyle.error,
+            alertText: 'Request is failed ...',
+          }),
+        );
     setResponse(response);
   };
 
