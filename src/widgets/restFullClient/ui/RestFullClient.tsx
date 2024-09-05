@@ -1,6 +1,6 @@
 'use client';
 import { useState } from 'react';
-import { Box, Button, TextField, Typography } from '@mui/material';
+import { Box, Button, Typography } from '@mui/material';
 
 import MethodManager from './MethodManager';
 import HeaderManager from './HeaderManager';
@@ -12,6 +12,7 @@ import { IHeaderData } from '../model/headerManagerModel';
 import { IRequestData } from '../model/requestHandlerModel';
 import { sendRequest } from '../model/requestHandler';
 import { AxiosResponse } from 'axios';
+import UrlManager from './UrlManager';
 
 const RestFullClient = () => {
   const [method, setMethod] = useState<ICRUD>(ICRUD.GET);
@@ -50,12 +51,12 @@ const RestFullClient = () => {
 
       <MethodManager method={method} setMethod={setMethod} />
 
-      <TextField
-        fullWidth
-        margin="normal"
-        label="Endpoint URL"
-        value={url}
-        onChange={(e) => setUrl(e.target.value)}
+      <UrlManager
+        url={url}
+        setUrl={setUrl}
+        method={method}
+        headers={headers}
+        body={body}
       />
 
       <HeaderManager setHeaders={setHeaders} />

@@ -19,6 +19,7 @@ const BodyManager = (props: IBodyProps) => {
       setBody(parsed);
       setError(null);
     } catch (err) {
+      setBody(() => null);
       setError('Invalid JSON');
     }
   };
