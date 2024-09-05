@@ -12,7 +12,7 @@ import TextFieldHint from '@shared/ui/TextFieldHint';
 import { useState } from 'react';
 
 const OneHeaderElement = (props: IHeaderElementProps) => {
-  const { id, setItems } = props;
+  const { id, items, setItems } = props;
 
   const [inputDisabled, setInputDisabled] = useState<boolean>(false);
 
@@ -99,7 +99,12 @@ const OneHeaderElement = (props: IHeaderElementProps) => {
       >
         Upd
       </Button>
-      <Button onClick={del} data-testid="Del" variant="contained">
+      <Button
+        onClick={del}
+        data-testid="Del"
+        disabled={items.length <= 1}
+        variant="contained"
+      >
         Del
       </Button>
     </Box>

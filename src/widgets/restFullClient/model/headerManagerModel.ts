@@ -13,5 +13,6 @@ export interface IHeaderItem {
 
 export interface IHeaderElementProps {
   id: number;
+  items: IHeaderItem[];
   setItems: (value: (prev: IHeaderItem[]) => IHeaderItem[]) => void;
 }

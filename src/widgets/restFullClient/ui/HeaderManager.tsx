@@ -45,7 +45,12 @@ const HeaderManager = (props: IheadersProps) => {
       </Button>
       <Box margin="0.5em 0">
         {items.map((el: IHeaderItem) => (
-          <OneHeaderElement key={el.id} id={el.id} setItems={setItems} />
+          <OneHeaderElement
+            key={el.id}
+            id={el.id}
+            items={items}
+            setItems={setItems}
+          />
         ))}
       </Box>
     </Box>
