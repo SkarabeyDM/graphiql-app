@@ -1,18 +1,19 @@
-export interface IHeaderData {
+import { Dispatch, SetStateAction } from 'react';
+
+export interface IHeadersData {
   [key: string]: string;
 }
 
 export interface IheadersProps {
-  setHeaders: (value: IHeaderData) => void;
+  setHeaders: Dispatch<SetStateAction<IHeadersData>>;
 }
 
-export interface IHeaderItem {
+export interface IHeadersItem {
   id: number;
-  data: IHeaderData;
+  data: IHeadersData;
 }
 
-export interface IHeaderElementProps {
+export interface IHeadersElementProps {
   id: number;
-  items: IHeaderItem[];
-  setItems: (value: (prev: IHeaderItem[]) => IHeaderItem[]) => void;
+  setItems: Dispatch<SetStateAction<IHeadersItem[]>>;
 }

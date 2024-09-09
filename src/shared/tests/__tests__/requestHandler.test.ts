@@ -1,5 +1,5 @@
+import { sendRequest } from '@widgets/restFullClient/lib/requestHandler';
 import { ICRUD } from '@widgets/restFullClient/model/methodManagerModel';
-import { sendRequest } from '@widgets/restFullClient/model/requestHandler';
 import { IRequestData } from '@widgets/restFullClient/model/requestHandlerModel';
 import axios from 'axios';
 import MockAdapter from 'axios-mock-adapter';
@@ -20,7 +20,7 @@ describe('sendRequest', () => {
       method: ICRUD.GET,
       url: 'https://example.com',
       headers: {},
-      body: null,
+      data: null,
     };
 
     const mockResponse = { data: 'response data' };
@@ -35,7 +35,7 @@ describe('sendRequest', () => {
       method: ICRUD.GET,
       url: 'https://example.com',
       headers: {},
-      body: null,
+      data: null,
     };
 
     mock.onGet('https://example.com').reply(400, { message: 'Bad Request' });
@@ -50,7 +50,7 @@ describe('sendRequest', () => {
       method: ICRUD.GET,
       url: 'https://example.com',
       headers: {},
-      body: null,
+      data: null,
     };
 
     mock.onGet('https://example.com').networkError();

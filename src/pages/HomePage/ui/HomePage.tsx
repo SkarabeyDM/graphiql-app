@@ -1,5 +1,6 @@
 import { Typography } from '@mui/material';
 import Grid from '@mui/material/Unstable_Grid2';
+import { RestFullClient } from '@widgets/restFullClient';
 
 const HomePageComponent = () => {
   return (
@@ -20,7 +21,9 @@ const HomePageComponent = () => {
           REST/GraphiQL Client
         </Typography>
       </Grid>
-      <Grid></Grid>
+      <Grid>
+        <RestFullClient />
+      </Grid>
     </Grid>
   );
 };

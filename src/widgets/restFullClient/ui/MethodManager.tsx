@@ -1,8 +1,18 @@
-import { FormControl, InputLabel, MenuItem, Select } from '@mui/material';
+import {
+  FormControl,
+  InputLabel,
+  MenuItem,
+  Select,
+  SelectChangeEvent,
+} from '@mui/material';
 import { ICRUD, IMethodProps } from '../model/methodManagerModel';
+import { FC } from 'react';
 
-const MethodManager = (props: IMethodProps) => {
-  const { method, setMethod } = props;
+const MethodManager: FC<IMethodProps> = ({ method, setMethod }) => {
+  const handleChange = (e: SelectChangeEvent<string>): void => {
+    const { value } = e.target;
+    setMethod(value as ICRUD);
+  };
 
   return (
     <FormControl fullWidth>
@@ -12,7 +22,7 @@ const MethodManager = (props: IMethodProps) => {
         id="request-method-select"
         value={method}
         label="Method"
-        onChange={(e) => setMethod(e.target.value as ICRUD)}
+        onChange={handleChange}
       >
         <MenuItem value={ICRUD.GET}>GET</MenuItem>
         <MenuItem value={ICRUD.POST}>POST</MenuItem>

@@ -1,32 +1,25 @@
-import { useState, useEffect } from 'react';
-
+import { useState, useEffect, FC } from 'react';
 import { Box, Button } from '@mui/material';
 import OneHeaderElement from './OneHeaderElement';
 import {
-  IHeaderData,
-  IHeaderItem,
+  IHeadersData,
+  IHeadersItem,
   IheadersProps,
 } from '../model/headerManagerModel';
 
-const HeaderManager = (props: IheadersProps) => {
-  const { setHeaders } = props;
-
+const HeaderManager: FC<IheadersProps> = ({ setHeaders }) => {
   const [count, setCount] = useState<number>(1);
-  const [items, setItems] = useState<IHeaderItem[]>([]);
+  const [items, setItems] = useState<IHeadersItem[]>([]);
 
-  const createHeader = () => {
-    const item: IHeaderItem = { id: count, data: { key: '', value: '' } };
+  const createHeader = (): void => {
+    const item: IHeadersItem = { id: count, data: { key: '', value: '' } };
     setItems((prev) => [...prev, item]);
     setCount((prev) => prev + 1);
   };
 
   useEffect(() => {
-    createHeader();
-  }, []);
-
-  useEffect(() => {
-    const newHeaders: IHeaderData = items.reduce(
-      (object: IHeaderData, el: IHeaderItem) => {
+    const newHeaders: IHeadersData = items.reduce(
+      (object: IHeadersData, el: IHeadersItem) => {
         return { ...object, [el.data.key]: el.data.value };
       },
       {},
@@ -44,13 +37,8 @@ const HeaderManager = (props: IheadersProps) => {
         Create Header
       </Button>
       <Box margin="0.5em 0">
-        {items.map((el: IHeaderItem) => (
-          <OneHeaderElement
-            key={el.id}
-            id={el.id}
-            items={items}
-            setItems={setItems}
-          />
+        {items.map((el: IHeadersItem) => (
+          <OneHeaderElement key={el.id} id={el.id} setItems={setItems} />
         ))}
       </Box>
     </Box>

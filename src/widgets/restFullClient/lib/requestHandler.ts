@@ -1,14 +1,18 @@
 import axios from 'axios';
 import { IRequestData } from './requestHandlerModel';
 
-export const sendRequest = async (DATA: IRequestData) => {
-  const { method, url, headers, body } = DATA;
+export const sendRequest = async ({
+  method,
+  url,
+  headers,
+  data,
+}: IRequestData) => {
   try {
     const response = await axios({
       method,
       url,
       headers,
-      data: body,
+      data,
     });
     return response;
   } catch (error) {

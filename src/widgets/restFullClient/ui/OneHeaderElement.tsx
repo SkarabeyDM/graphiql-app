@@ -1,25 +1,17 @@
-import * as yup from 'yup';
 import { yupResolver } from '@hookform/resolvers/yup';
-
 import { useForm } from 'react-hook-form';
 import { Box, Button, TextField } from '@mui/material';
 import {
-  IHeaderData,
-  IHeaderElementProps,
-  IHeaderItem,
+  IHeadersData,
+  IHeadersElementProps,
+  IHeadersItem,
 } from '../model/headerManagerModel';
 import TextFieldHint from '@shared/ui/TextFieldHint';
-import { useState } from 'react';
+import { FC, useState } from 'react';
+import { headersSchema } from '../model/schema';
 
-const OneHeaderElement = (props: IHeaderElementProps) => {
-  const { id, items, setItems } = props;
-
+const OneHeaderElement: FC<IHeadersElementProps> = ({ id, setItems }) => {
   const [inputDisabled, setInputDisabled] = useState<boolean>(false);
-
-  const headerSchema = yup.object().shape({
-    key: yup.string().required('This field is required'),
-    value: yup.string().required('This field is required'),
-  });
 
   const {
     register,
@@ -27,20 +19,20 @@ const OneHeaderElement = (props: IHeaderElementProps) => {
     handleSubmit,
   } = useForm({
     mode: 'onChange',
-    resolver: yupResolver(headerSchema),
+    resolver: yupResolver(headersSchema),
   });
 
-  const add = (data: IHeaderData) => {
+  const add = (data: IHeadersData): void => {
     setItems((prev) => [
-      ...prev.map((el: IHeaderItem) =>
+      ...prev.map((el: IHeadersItem) =>
         el.id === id ? { id, data: { key: data.key, value: data.value } } : el,
       ),
     ]);
     setInputDisabled(true);
   };
 
-  const del = () => {
-    setItems((prev) => [...prev.filter((el: IHeaderItem) => el.id !== id)]);
+  const del = (): void => {
+    setItems((prev) => [...prev.filter((el: IHeadersItem) => el.id !== id)]);
     setInputDisabled(true);
   };
 
@@ -99,12 +91,7 @@ const OneHeaderElement = (props: IHeaderElementProps) => {
       >
         Upd
       </Button>
-      <Button
-        onClick={del}
-        data-testid="Del"
-        disabled={items.length <= 1}
-        variant="contained"
-      >
+      <Button onClick={del} data-testid="Del" variant="contained">
         Del
       </Button>
     </Box>

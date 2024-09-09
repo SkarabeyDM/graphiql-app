@@ -1,3 +1,5 @@
+import { Dispatch, SetStateAction } from 'react';
+
 export enum ICRUD {
   GET = 'GET',
   POST = 'POST',
@@ -7,5 +9,5 @@ export enum ICRUD {
 
 export interface IMethodProps {
   method: ICRUD;
-  setMethod: (value: ICRUD) => void;
+  setMethod: Dispatch<SetStateAction<ICRUD>>;
 }
