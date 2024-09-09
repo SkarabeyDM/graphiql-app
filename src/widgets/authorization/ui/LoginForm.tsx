@@ -13,9 +13,11 @@ import { logSchema } from '../model/schema';
 import { yupResolver } from '@hookform/resolvers/yup';
 import { Form, Link, PasswordInput } from '@shared/ui';
 import { Login } from '@mui/icons-material';
+import { useTranslations } from 'next-intl';
 
 export const LoginForm = () => {
   const dispatch = useAppDispatch();
+  const t = useTranslations('Auth');
 
   const {
     register,
@@ -35,7 +37,7 @@ export const LoginForm = () => {
         showAlert({
           alert: true,
           style: AlertStyle.success,
-          alertText: 'Authorization was successful',
+          alertText: t('successfulLogin'),
         }),
       );
       reset();
@@ -55,7 +57,7 @@ export const LoginForm = () => {
   };
 
   return (
-    <Form onSubmit={handleSubmit(onSubmit)} title="Sign In">
+    <Form onSubmit={handleSubmit(onSubmit)} title={t('login')}>
       <TextField
         fullWidth
         id="email"
@@ -67,6 +69,7 @@ export const LoginForm = () => {
       />
       <PasswordInput
         error={!!errors.password}
+        label={t('password')}
         helperText={errors.password && errors.password.message}
         inputProps={{ ...register('password') }}
       />
@@ -79,10 +82,10 @@ export const LoginForm = () => {
         fullWidth
         startIcon={<Login />}
       >
-        Sign In
+        {t('login')}
       </Button>
       <Link alignSelf="flex-end" href="/register" underline="none">
-        Sign Up
+        {t('register')}
       </Link>
     </Form>
   );

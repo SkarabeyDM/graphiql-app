@@ -2,6 +2,10 @@
   "Auth": {
     "login": "Sign In",
     "register": "Sign Up",
-    "logout": "Sign Out"
+    "logout": "Sign Out",
+    "password": "Password",
+    "confirmPassword": "Confirm password",
+    "successfulRegistration": "Successful registration",
+    "successfulLogin": "Successful authorization"
   }
 }

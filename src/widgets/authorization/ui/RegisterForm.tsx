@@ -17,9 +17,11 @@ import { regSchema } from '../model/schema';
 import { yupResolver } from '@hookform/resolvers/yup';
 import { Form, Link, PasswordInput } from '@shared/ui';
 import { Create } from '@mui/icons-material';
+import { useTranslations } from 'next-intl';
 
 export const RegisterForm = () => {
   const dispatch = useAppDispatch();
+  const t = useTranslations('Auth');
 
   const {
     register,
@@ -62,11 +64,11 @@ export const RegisterForm = () => {
   };
 
   return (
-    <Form onSubmit={handleSubmit(onSubmit)} title="Sign Up">
+    <Form onSubmit={handleSubmit(onSubmit)} title={t('register')}>
       <TextField
         fullWidth
         id="email"
-        label="Email"
+        label="E-mail"
         variant="outlined"
         error={!!errors.email}
         helperText={errors.email?.message}
@@ -75,12 +77,13 @@ export const RegisterForm = () => {
       <PasswordInput
         error={!!errors.password}
         helperText={errors.password?.message}
+        label={t('password')}
         inputProps={{ ...register('password') }}
       />
       <PasswordInput
         error={!!errors.confirmPassword}
         helperText={errors.confirmPassword?.message}
-        label="Confirm password"
+        label={t('confirmPassword')}
         id="confirm-password"
         inputProps={{ ...register('confirmPassword') }}
       />
@@ -93,10 +96,10 @@ export const RegisterForm = () => {
         variant="contained"
         startIcon={<Create />}
       >
-        Sign Up
+        {t('register')}
       </Button>
       <Link alignSelf="flex-end" href="/login" underline="none">
-        Sign In
+        {t('login')}
       </Link>
     </Form>
   );
