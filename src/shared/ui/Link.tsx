@@ -1,4 +1,4 @@
-import NextLink from 'next/link';
+import { LinkI18n } from '@shared/i18n';
 import { LinkProps as MuiLinkProps, Link as MuiLink } from '@mui/material';
 import { Url } from 'next/dist/shared/lib/router/router';
 
@@ -7,5 +7,5 @@ export interface LinkProps extends Omit<MuiLinkProps, 'href'> {
 }
 
 export const Link = ({ ...props }: LinkProps) => {
-  return <MuiLink {...props} component={NextLink} />;
+  return <MuiLink {...props} component={LinkI18n} />;
 };
