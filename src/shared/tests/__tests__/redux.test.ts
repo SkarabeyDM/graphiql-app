@@ -10,6 +10,12 @@ describe('alertState reducers', () => {
     alertState: { alert: false, style: AlertStyle.success, alertText: '' },
   };
 
+  /**
+   * Тест для редьюсера alertState.
+   * Проверяет, что состояние изменяется на ошибочное оповещение.
+   *
+   * @returns {void}
+   */
   it('should show error alert', () => {
     const newAlertState: IAlert = {
       alert: true,

@@ -15,6 +15,12 @@ describe('sendRequest', () => {
     mock.restore();
   });
 
+  /**
+   * Тест для функции sendRequest.
+   * Проверяет, что функция возвращает данные ответа при успешном запросе.
+   *
+   * @returns {Promise<void>}
+   */
   it('should return response data on successful request', async () => {
     const data: IRequestData = {
       method: ICRUD.GET,
@@ -30,6 +36,12 @@ describe('sendRequest', () => {
     expect(response?.data).toEqual(mockResponse);
   });
 
+  /**
+   * Тест для функции sendRequest.
+   * Проверяет, что функция возвращает ошибку при неудачном запросе.
+   *
+   * @returns {Promise<void>}
+   */
   it('should return error response on failed request', async () => {
     const data: IRequestData = {
       method: ICRUD.GET,
@@ -45,6 +57,12 @@ describe('sendRequest', () => {
     expect(response?.data).toEqual({ message: 'Bad Request' });
   });
 
+  /**
+   * Тест для функции sendRequest.
+   * Проверяет, что функция обрабатывает сетевые ошибки.
+   *
+   * @returns {Promise<void>}
+   */
   it('should handle network errors', async () => {
     const data: IRequestData = {
       method: ICRUD.GET,

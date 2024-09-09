@@ -15,6 +15,12 @@ describe('BodyManager component', () => {
     renderWithProviders(<BodyManager {...defaultProps} />);
   });
 
+  /**
+   * Тест для компонента BodyManager.
+   * Проверяет, что поле "Body" принимает валидный текст/JSON.
+   *
+   * @returns {void}
+   */
   it('renders with the field "Body" must accept valid text/json', () => {
     const field = screen.getByRole('textbox', { name: 'Body' });
     expect(field).toBeInTheDocument();

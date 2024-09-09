@@ -9,11 +9,23 @@ describe('Login component', () => {
     renderWithProviders(<Login />);
   });
 
+  /**
+   * Тест для компонента Login.
+   * Проверяет, что компонент рендерится с заголовком "Login".
+   *
+   * @returns {void}
+   */
   it('renders with inclide the title', () => {
     const title = screen.getByRole('heading', { name: 'Login' });
     expect(title).toBeInTheDocument();
   });
 
+  /**
+   * Тест для компонента Login.
+   * Проверяет, что поле ввода "email" принимает текст.
+   *
+   * @returns {void}
+   */
   it('renders with the input field "email" must accept text', () => {
     const inputEmail = screen.getByRole('textbox', { name: 'Email' });
     expect(inputEmail).toBeInTheDocument();
@@ -24,6 +36,12 @@ describe('Login component', () => {
     });
   });
 
+  /**
+   * Тест для компонента Login.
+   * Проверяет, что поле ввода "password" принимает текст.
+   *
+   * @returns {void}
+   */
   it('renders with the input field "password" must accept text', () => {
     const inputPassword = screen.getByLabelText('Password');
     expect(inputPassword).toBeInTheDocument();
@@ -34,6 +52,12 @@ describe('Login component', () => {
     });
   });
 
+  /**
+   * Тест для компонента Login.
+   * Проверяет, что кнопка "Login" рендерится и может быть нажата.
+   *
+   * @returns {void}
+   */
   it('renders with the Login button', () => {
     const button = screen.getByTestId('Login');
     expect(button).toBeInTheDocument();

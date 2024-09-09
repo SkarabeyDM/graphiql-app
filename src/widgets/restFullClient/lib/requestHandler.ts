@@ -1,5 +1,5 @@
 import axios from 'axios';
-import { IRequestData } from './requestHandlerModel';
+import { IRequestData } from '../model/requestHandlerModel';
 
 export const sendRequest = async ({
   method,

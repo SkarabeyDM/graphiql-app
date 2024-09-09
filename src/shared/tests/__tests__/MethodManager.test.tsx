@@ -16,11 +16,23 @@ describe('MethodManager component', () => {
     return renderWithProviders(<MethodManager {...defaultProps} {...props} />);
   };
 
+  /**
+   * Тест для компонента MethodManager.
+   * Проверяет, что компонент MethodManager рендерится.
+   *
+   * @returns {void}
+   */
   it('renders MethodManager component', () => {
     renderComponent();
     expect(screen.getByLabelText('Method')).toBeInTheDocument();
   });
 
+  /**
+   * Тест для компонента MethodManager.
+   * Проверяет, что отображается правильный начальный метод.
+   *
+   * @returns {void}
+   */
   it('displays the correct initial method', () => {
     renderComponent({ method: ICRUD.POST });
     expect(screen.getByDisplayValue('POST')).toBeInTheDocument();
