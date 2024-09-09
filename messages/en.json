@@ -1,0 +1,7 @@
+{
+  "Auth": {
+    "login": "Sign In",
+    "register": "Sign Up",
+    "logout": "Sign Out"
+  }
+}

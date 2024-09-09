@@ -3,7 +3,8 @@ import { AppRouterCacheProvider } from '@mui/material-nextjs/v13-appRouter';
 import { Inter } from 'next/font/google';
 import { Box } from '@mui/material';
 import { StoreProvider } from '@shared/redux';
-import AlertComponent from '@widgets/alert/ui/Alert';
+import { NextIntlClientProvider } from 'next-intl';
+import { getMessages } from 'next-intl/server';
 
 const inter = Inter({ subsets: ['latin'] });
 
@@ -15,15 +16,19 @@ export const metadata: Metadata = {
   },
 };
 
-export const RootLayout = ({
+export const RootLayout = async ({
   children,
-}: Readonly<{
+  params: { locale },
+}: {
   children: React.ReactNode;
-}>) => {
+  params: { locale: string };
+}) => {
+  const messages = await getMessages();
+
   return (
     <StoreProvider>
       <AppRouterCacheProvider>
-        <Box component="html" height="100%" lang="en">
+        <Box component="html" height="100%" lang={locale}>
           <Box
             component="body"
             m={0}
@@ -31,8 +36,10 @@ export const RootLayout = ({
             minHeight="100%"
             className={inter.className}
           >
-            <AlertComponent />
-            {children}
+            <NextIntlClientProvider messages={messages}>
+              {/* <AlertComponent /> */}
+              {children}
+            </NextIntlClientProvider>
           </Box>
         </Box>
       </AppRouterCacheProvider>
