@@ -37,8 +37,8 @@ const HeaderManager: FC<IheadersProps> = ({ setHeaders }) => {
         Create Header
       </Button>
       <Box margin="0.5em 0">
-        {items.map((el: IHeadersItem) => (
-          <OneHeaderElement key={el.id} id={el.id} setItems={setItems} />
+        {items.map(({ id }: IHeadersItem) => (
+          <OneHeaderElement key={id} id={id} setItems={setItems} />
         ))}
       </Box>
     </Box>

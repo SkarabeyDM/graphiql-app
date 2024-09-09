@@ -23,7 +23,12 @@ const UrlManager: FC<IUrlProps> = ({ url, setUrl, method, headers, body }) => {
   };
 
   const handleChange = (e: React.ChangeEvent<HTMLInputElement>): void => {
-    setUrl(e.target.value);
+    const { value } = e?.target || {};
+
+    if (!value) {
+      return;
+    }
+    setUrl(value);
   };
 
   return (

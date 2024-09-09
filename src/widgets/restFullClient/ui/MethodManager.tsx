@@ -10,7 +10,12 @@ import { FC } from 'react';
 
 const MethodManager: FC<IMethodProps> = ({ method, setMethod }) => {
   const handleChange = (e: SelectChangeEvent<string>): void => {
-    const { value } = e.target;
+    const { value } = e?.target || {};
+
+    if (!value) {
+      return;
+    }
+
     setMethod(value as ICRUD);
   };
 
@@ -24,10 +29,11 @@ const MethodManager: FC<IMethodProps> = ({ method, setMethod }) => {
         label="Method"
         onChange={handleChange}
       >
-        <MenuItem value={ICRUD.GET}>GET</MenuItem>
-        <MenuItem value={ICRUD.POST}>POST</MenuItem>
-        <MenuItem value={ICRUD.PUT}>PUT</MenuItem>
-        <MenuItem value={ICRUD.DELETE}>DELETE</MenuItem>
+        {Object.values(ICRUD).map((crudValue: ICRUD) => (
+          <MenuItem key={crudValue} value={crudValue}>
+            {crudValue}
+          </MenuItem>
+        ))}
       </Select>
     </FormControl>
   );
