@@ -6,6 +6,7 @@ import { StoreProvider } from '@shared/redux';
 import { NextIntlClientProvider } from 'next-intl';
 import { getMessages } from 'next-intl/server';
 import { Alert } from '@widgets/alert';
+import { LanguageSelect } from '@features/internationalization';
 
 const inter = Inter({ subsets: ['latin', 'cyrillic'] });
 
@@ -35,6 +36,7 @@ export const RootLayout = async ({
           >
             <NextIntlClientProvider messages={messages}>
               <Alert />
+              <LanguageSelect />
               {children}
             </NextIntlClientProvider>
           </Box>
