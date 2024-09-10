@@ -11,6 +11,7 @@ export const LanguageSelect = () => {
   const [selectedLocale, setLocale] = useState<Locales>(routing.defaultLocale);
   const router = useRouter();
   const pathname = usePathname();
+
   const changeLocale = (lang: string) => {
     router.replace(pathname, { locale: lang as Locales });
   };
