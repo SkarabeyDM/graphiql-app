@@ -4,6 +4,12 @@ import { renderWithProviders } from '../lib';
 import { LogoutButton } from '@features/auth';
 
 describe('Logout component', () => {
+  /**
+   * Тест для компонента Logout.
+   * Проверяет, что кнопка "Logout" рендерится и может быть нажата.
+   *
+   * @returns {void}
+   */
   it('renders with the Logout button', () => {
     renderWithProviders(<LogoutButton />);
 

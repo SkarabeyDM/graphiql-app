@@ -13,9 +13,6 @@ const alertSlice = createSlice({
 
   reducers: {
     showAlert(state, action: PayloadAction<IAlert>) {
-      setTimeout(() => {
-        hideAlert();
-      }, 3000);
       state.alertState = action.payload;
     },
 
