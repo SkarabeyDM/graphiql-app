@@ -1,12 +1,12 @@
 import '@testing-library/jest-dom';
 import { act, fireEvent, screen } from '@testing-library/react';
-import { Registration } from '@widgets/authorization';
 import userEvent from 'user-event';
 import { renderWithProviders } from '../lib';
+import { RegisterForm } from '@widgets/authorization';
 
 describe('Registration component', () => {
   beforeEach(() => {
-    renderWithProviders(<Registration />);
+    renderWithProviders(<RegisterForm />);
   });
 
   /**
@@ -16,7 +16,7 @@ describe('Registration component', () => {
    * @returns {void}
    */
   it('renders with inclide the title', () => {
-    const title = screen.getByRole('heading', { name: 'Registration' });
+    const title = screen.getByRole('heading', { name: 'Sign Up' });
     expect(title).toBeInTheDocument();
   });
 
@@ -59,7 +59,7 @@ describe('Registration component', () => {
    * @returns {void}
    */
   it('renders with the Registration button', () => {
-    const button = screen.getByTestId('Registration');
+    const button = screen.getByTestId('registration-button');
     expect(button).toBeInTheDocument();
 
     act(() => {

@@ -1,12 +1,12 @@
 import '@testing-library/jest-dom';
 import { act, fireEvent, screen } from '@testing-library/react';
-import { Login } from '@widgets/authorization';
+import { LoginForm } from '@widgets/authorization';
 import userEvent from 'user-event';
 import { renderWithProviders } from '../lib';
 
 describe('Login component', () => {
   beforeEach(() => {
-    renderWithProviders(<Login />);
+    renderWithProviders(<LoginForm />);
   });
 
   /**
@@ -16,7 +16,7 @@ describe('Login component', () => {
    * @returns {void}
    */
   it('renders with inclide the title', () => {
-    const title = screen.getByRole('heading', { name: 'Login' });
+    const title = screen.getByRole('heading', { name: 'Sign In' });
     expect(title).toBeInTheDocument();
   });
 
@@ -59,7 +59,7 @@ describe('Login component', () => {
    * @returns {void}
    */
   it('renders with the Login button', () => {
-    const button = screen.getByTestId('Login');
+    const button = screen.getByTestId('login-button');
     expect(button).toBeInTheDocument();
 
     act(() => {

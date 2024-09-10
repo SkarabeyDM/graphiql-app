@@ -24,9 +24,10 @@ const AlertComponent = () => {
 
   return (
     <Box
-      position="absolute"
-      top="0"
-      right="0"
+      position="fixed"
+      top="1rem"
+      right="1rem"
+      zIndex={1}
       sx={{
         opacity: alert.alertState.alert ? '1' : '0',
       }}
