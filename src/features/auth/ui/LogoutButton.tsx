@@ -5,9 +5,11 @@ import { useAppDispatch } from '@shared/redux';
 import { showAlert } from '@shared/redux/slices/alertSlice';
 import { AlertStyle } from '@widgets/alert/model/Alert.model';
 import { Logout } from '@mui/icons-material';
+import { useTranslations } from 'next-intl';
 
 export const LogoutButton = (props: ButtonProps) => {
   const dispatch = useAppDispatch();
+  const t = useTranslations('Auth');
   const [user, loading] = useAuthState();
 
   const logoutUser = () => {
@@ -30,7 +32,7 @@ export const LogoutButton = (props: ButtonProps) => {
       startIcon={<Logout />}
       {...props}
     >
-      Logout
+      {t('logout')}
     </Button>
   );
 };

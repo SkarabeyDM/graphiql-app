@@ -1,0 +1,12 @@
+{
+  "Auth": {
+    "login": "Вход",
+    "register": "Регистрация",
+    "logout": "Выход",
+    "email": "E-mail",
+    "password": "Пароль",
+    "confirmPassword": "Подтвердите пароль",
+    "successfulRegistration": "Успешная регистрация",
+    "successfulLogin": "Успешная авторизация"
+  }
+}
