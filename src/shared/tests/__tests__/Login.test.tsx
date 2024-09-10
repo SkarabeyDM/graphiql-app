@@ -15,7 +15,7 @@ describe('Login component', () => {
   });
 
   it('renders with the input field "email" must accept text', () => {
-    const inputEmail = screen.getByRole('textbox', { name: 'Email' });
+    const inputEmail = screen.getByRole('textbox', { name: 'E-mail' });
     expect(inputEmail).toBeInTheDocument();
 
     act(() => {
