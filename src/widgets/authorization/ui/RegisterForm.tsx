@@ -68,7 +68,7 @@ export const RegisterForm = () => {
       <TextField
         fullWidth
         id="email"
-        label="E-mail"
+        label={t('email')}
         variant="outlined"
         error={!!errors.email}
         helperText={errors.email?.message}

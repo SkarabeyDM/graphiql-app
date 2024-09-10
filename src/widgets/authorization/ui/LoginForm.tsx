@@ -61,7 +61,7 @@ export const LoginForm = () => {
       <TextField
         fullWidth
         id="email"
-        label="Email"
+        label={t('email')}
         variant="outlined"
         error={!!errors.email}
         helperText={errors.email && errors.email.message}

@@ -6,6 +6,6 @@ export interface LinkProps extends Omit<MuiLinkProps, 'href'> {
   href: Url;
 }
 
-export const Link = ({ ...props }: LinkProps) => {
-  return <MuiLink {...props} component={LinkI18n} />;
-};
+export const Link = (props: LinkProps) => (
+  <MuiLink {...props} component={LinkI18n} />
+);

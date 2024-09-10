@@ -3,6 +3,7 @@
     "login": "Sign In",
     "register": "Sign Up",
     "logout": "Sign Out",
+    "email": "E-mail",
     "password": "Password",
     "confirmPassword": "Confirm password",
     "successfulRegistration": "Successful registration",
