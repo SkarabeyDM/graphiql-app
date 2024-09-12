@@ -1,19 +1,17 @@
 'use client';
 import { FC, useState } from 'react';
 import { Box, Button, Typography } from '@mui/material';
-import MethodManager from './MethodManager';
-import HeaderManager from './HeaderManager';
 import BodyManager from './BodyManager';
-import { ICRUD } from '../model/methodManagerModel';
+import { ICRUD } from '../../../features/editor/model/methodEditorModel';
 import { IBodyData } from '../model/bodyManagerModel';
-import { IHeadersData } from '../model/headerManagerModel';
+import { IHeadersData } from '../../../features/editor/model/headersEditorModel';
 import { IRequestData } from '../model/requestHandlerModel';
 import { AxiosResponse } from 'axios';
-import UrlManager from './UrlManager';
 import { useAppDispatch } from '@shared/redux';
 import { showAlert } from '@shared/redux/slices/alertSlice';
 import { AlertStyle } from '@widgets/alert/model/Alert.model';
 import { sendRequest } from '../lib/requestHandler';
+import { HeaderEditor, MethodEditor, UrlEditor } from '@features/editor';
 
 const RestFullClient: FC = () => {
   const dispatch = useAppDispatch();
@@ -65,9 +63,9 @@ const RestFullClient: FC = () => {
     <Box width="50em">
       <h2>RESTfull client</h2>
 
-      <MethodManager method={method} setMethod={setMethod} />
+      <MethodEditor method={method} setMethod={setMethod} />
 
-      <UrlManager
+      <UrlEditor
         url={url}
         setUrl={setUrl}
         method={method}
@@ -75,7 +73,7 @@ const RestFullClient: FC = () => {
         body={body}
       />
 
-      <HeaderManager setHeaders={setHeaders} />
+      <HeaderEditor setHeaders={setHeaders} />
 
       <BodyManager body={body} setBody={setBody} />
 

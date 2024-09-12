@@ -5,7 +5,7 @@ import {
   IHeadersData,
   IHeadersElementProps,
   IHeadersItem,
-} from '../model/headerManagerModel';
+} from '../model/headersEditorModel';
 import { FC, useState } from 'react';
 import { headersSchema } from '../model/schema';
 

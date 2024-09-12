@@ -1,34 +1,31 @@
 import '@testing-library/jest-dom';
 import { screen } from '@testing-library/react';
 import { renderWithProviders } from '../lib';
-import MethodManager from '@widgets/restFullClient/ui/MethodManager';
-import {
-  ICRUD,
-  IMethodProps,
-} from '@widgets/restFullClient/model/methodManagerModel';
+import { ICRUD, IMethodProps } from '@features/editor/model/methodEditorModel';
+import { MethodEditor } from '@features/editor';
 
-describe('MethodManager component', () => {
+describe('MethodEditor component', () => {
   const renderComponent = (props: Partial<IMethodProps> = {}) => {
     const defaultProps: IMethodProps = {
       method: ICRUD.GET,
       setMethod: jest.fn(),
     };
-    return renderWithProviders(<MethodManager {...defaultProps} {...props} />);
+    return renderWithProviders(<MethodEditor {...defaultProps} {...props} />);
   };
 
   /**
-   * Тест для компонента MethodManager.
-   * Проверяет, что компонент MethodManager рендерится.
+   * Тест для компонента MethodEditor.
+   * Проверяет, что компонент MethodEditor рендерится.
    *
    * @returns {void}
    */
-  it('renders MethodManager component', () => {
+  it('renders MethodEditor component', () => {
     renderComponent();
     expect(screen.getByLabelText('Method')).toBeInTheDocument();
   });
 
   /**
-   * Тест для компонента MethodManager.
+   * Тест для компонента MethodEditor.
    * Проверяет, что отображается правильный начальный метод.
    *
    * @returns {void}

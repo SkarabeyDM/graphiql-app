@@ -1,4 +1,4 @@
-import { encodeBase64 } from '@widgets/restFullClient/lib/encodeBase64';
+import { encodeBase64 } from '@features/editor/lib/encodeBase64';
 
 describe('encodeBase64', () => {
   /**
