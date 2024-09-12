@@ -12,7 +12,7 @@ export const Header: FC = () => {
   const [user] = useAuthState();
 
   return (
-    <AppBar position="sticky" color="transparent">
+    <AppBar position="sticky" color="default">
       <Stack
         direction="row"
         justifyContent="space-between"
