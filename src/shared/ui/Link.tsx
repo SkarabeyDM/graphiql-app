@@ -7,5 +7,5 @@ export interface LinkProps extends Omit<MuiLinkProps, 'href'> {
 }
 
 export const Link = (props: LinkProps) => (
-  <MuiLink {...props} component={LinkI18n} />
+  <MuiLink underline="none" {...props} component={LinkI18n} />
 );
