@@ -1,5 +1,6 @@
 import { Typography } from '@mui/material';
 import Grid from '@mui/material/Unstable_Grid2';
+import { GraphQl } from '@widgets/graphQl';
 
 export const HomePage = () => {
   return (
@@ -17,6 +18,9 @@ export const HomePage = () => {
         <Typography variant="h4" fontWeight="bold" fontStyle="italic">
           REST/GraphiQL Client
         </Typography>
+      </Grid>
+      <Grid>
+        <GraphQl />
       </Grid>
     </Grid>
   );
