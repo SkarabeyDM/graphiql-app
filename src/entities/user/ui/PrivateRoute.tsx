@@ -1,6 +1,6 @@
 'use client';
+import { redirect } from '@shared/i18n';
 import { useAuthState } from '../model/firebase';
-import { redirect } from 'next/navigation';
 
 export interface PrivateRouteProps {
   /** The URL to redirect to if the user is not authenticated or if `requireAuth` is `false`. @default `/`. */
