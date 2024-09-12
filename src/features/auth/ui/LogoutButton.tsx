@@ -25,7 +25,7 @@ export const LogoutButton = (props: ButtonProps) => {
 
   return (
     <Button
-      variant="contained"
+      variant="outlined"
       onClick={logoutUser}
       disabled={loading || !user}
       data-testid="logout-button"

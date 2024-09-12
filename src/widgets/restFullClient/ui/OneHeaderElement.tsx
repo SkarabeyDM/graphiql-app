@@ -6,7 +6,6 @@ import {
   IHeadersElementProps,
   IHeadersItem,
 } from '../model/headerManagerModel';
-import TextFieldHint from '@shared/ui/TextFieldHint';
 import { FC, useState } from 'react';
 import { headersSchema } from '../model/schema';
 
@@ -45,36 +44,28 @@ const OneHeaderElement: FC<IHeadersElementProps> = ({ id, setItems }) => {
         '& > :not(style)': { m: 0.5 },
       }}
     >
-      <Box position="relative">
-        <TextField
-          disabled={inputDisabled}
-          fullWidth
-          id="key"
-          label="Key"
-          variant="outlined"
-          {...register('key', { onChange: () => null })}
-        />
-
-        <TextFieldHint
-          text={errors.key && errors.key.message ? errors.key.message : ''}
-        />
-      </Box>
-      <Box position="relative">
-        <TextField
-          disabled={inputDisabled}
-          fullWidth
-          id="value"
-          label="Value"
-          variant="outlined"
-          {...register('value', { onChange: () => null })}
-        />
-
-        <TextFieldHint
-          text={
-            errors.value && errors.value.message ? errors.value.message : ''
-          }
-        />
-      </Box>
+      <TextField
+        disabled={inputDisabled}
+        fullWidth
+        id="key"
+        label="Key"
+        variant="outlined"
+        error={!!errors.key}
+        helperText={errors.key && errors.key.message ? errors.key.message : ''}
+        {...register('key')}
+      />
+      <TextField
+        disabled={inputDisabled}
+        fullWidth
+        id="value"
+        label="Value"
+        variant="outlined"
+        error={!!errors.value}
+        helperText={
+          errors.value && errors.value.message ? errors.value.message : ''
+        }
+        {...register('value', { onChange: () => null })}
+      />
       <Button
         data-testid="Add"
         type="submit"

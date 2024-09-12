@@ -37,8 +37,9 @@ export const LanguageSelect = () => {
       variant="outlined"
       value={selectedLocale}
       onChange={handleChangeLocale}
-      sx={SX_UPPERCASE}
-      slotProps={{ root: { sx: { py: 1, px: 1.5 } }, input: { sx: { p: 0 } } }}
+      sx={{ ...SX_UPPERCASE, position: 'relative' }}
+      size="small"
+      MenuProps={{ disableScrollLock: true }}
     >
       {[Locales.English, Locales.Russian].map((lang) => (
         <MenuItem key={lang} value={lang} sx={SX_UPPERCASE}>
