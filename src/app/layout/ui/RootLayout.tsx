@@ -7,6 +7,7 @@ import { NextIntlClientProvider } from 'next-intl';
 import { getMessages } from 'next-intl/server';
 import { Alert } from '@widgets/alert';
 import { Header } from '@widgets/Header';
+import { Footer } from '@widgets/Footer';
 
 const inter = Inter({ subsets: ['latin', 'cyrillic'] });
 
@@ -38,6 +39,7 @@ export const RootLayout = async ({
               <Header />
               <Alert />
               {children}
+              <Footer />
             </NextIntlClientProvider>
           </Box>
         </Box>
