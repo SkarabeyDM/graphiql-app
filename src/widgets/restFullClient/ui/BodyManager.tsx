@@ -1,6 +1,5 @@
 import { FC, useState } from 'react';
-import { Box, TextField } from '@mui/material';
-import TextFieldHint from '@shared/ui/TextFieldHint';
+import { TextField } from '@mui/material';
 import { IBodyProps } from '../model/bodyManagerModel';
 
 const BodyManager: FC<IBodyProps> = ({ body, setBody }) => {
@@ -26,18 +25,17 @@ const BodyManager: FC<IBodyProps> = ({ body, setBody }) => {
   };
 
   return (
-    <Box position="relative" margin="1.5em 0">
-      <TextField
-        label="Body"
-        placeholder={`Example: {"model":"Cooper"}`}
-        value={json}
-        onChange={handleChange}
-        fullWidth
-        multiline
-        rows={3}
-      />
-      <TextFieldHint text={!!error && typeof error === 'string' ? error : ''} />
-    </Box>
+    <TextField
+      label="Body"
+      placeholder={`Example: {"model":"Cooper"}`}
+      value={json}
+      onChange={handleChange}
+      fullWidth
+      multiline
+      rows={3}
+      error={!!error}
+      helperText={!!error && typeof error === 'string' ? error : ''}
+    />
   );
 };
 
