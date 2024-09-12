@@ -19,17 +19,16 @@ const HeaderEditor: FC<IheadersProps> = ({ setHeaders }) => {
 
   useEffect(() => {
     const newHeaders: IHeadersData = items.reduce(
-      (object: IHeadersData, el: IHeadersItem) => {
-        return { ...object, [el.data.key]: el.data.value };
-      },
+      (object: IHeadersData, el: IHeadersItem) =>
+        el.data.key
+          ? { ...object, [el.data.key]: el.data.value }
+          : { ...object },
       {},
     );
 
     const isHeaders = Object.keys(newHeaders)[0];
 
-    if (isHeaders) {
-      setHeaders(newHeaders);
-    }
+    isHeaders ? setHeaders(newHeaders) : setHeaders({});
   }, [items]);
 
   return (
