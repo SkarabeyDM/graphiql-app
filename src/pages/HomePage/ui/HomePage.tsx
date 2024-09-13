@@ -8,7 +8,6 @@ export const HomePage = () => {
       direction="column"
       justifyContent="center"
       alignItems="center"
-      minHeight="100vh"
       width="100%"
       spacing={4}
       sx={{ m: 0, position: 'relative' }}
