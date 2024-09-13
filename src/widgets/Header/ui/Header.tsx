@@ -5,10 +5,12 @@ import { LogoutButton } from '@features/auth';
 import { LanguageSelect } from '@features/internationalization';
 import { AppBar, Stack } from '@mui/material';
 import { Link } from '@shared/ui';
+import { useTranslations } from 'next-intl';
 import Image from 'next/image';
 import { FC } from 'react';
 
 export const Header: FC = () => {
+  const t = useTranslations('Auth');
   const [user] = useAuthState();
 
   return (
@@ -28,8 +30,8 @@ export const Header: FC = () => {
             <LogoutButton />
           ) : (
             <>
-              <Link href="/login">Login</Link>/
-              <Link href="/register">Register</Link>
+              <Link href="/login">{t('login')}</Link>/
+              <Link href="/register">{t('register')}</Link>
             </>
           )}
           <LanguageSelect />
