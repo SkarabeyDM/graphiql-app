@@ -2,37 +2,127 @@
 import { HeaderEditor, MethodEditor, UrlEditor } from '@features/editor';
 import { IHeadersData } from '@features/editor/model/headersEditorModel';
 import { ICRUD } from '@features/editor/model/methodEditorModel';
-import { Box, Button } from '@mui/material';
-import { FC, useState } from 'react';
+import { Box, Button, TextField, Typography } from '@mui/material';
+import { FC, useEffect, useState } from 'react';
+import BodyEditor from './BodyEditor';
+import { IBodyEditorData } from '../model/bodyEditorModel';
+import { AxiosResponse } from 'axios';
+import { IRequestData } from '@widgets/restFullClient/model/requestHandlerModel';
+import { sendRequest } from '@shared/lib/requestHandler';
+import { showAlert } from '@shared/redux/slices/alertSlice';
+import { AlertStyle } from '@widgets/alert/model/Alert.model';
+import { useAppDispatch } from '@shared/redux';
 
 const GraphQl: FC = () => {
+  const dispatch = useAppDispatch();
+
   const [method, setMethod] = useState<ICRUD>(ICRUD.GET);
   const [url, setUrl] = useState<string>('');
+  const [urlSdl, setUrlSdl] = useState<string>('');
   const [headers, setHeaders] = useState<IHeadersData>({});
+  const [body, setBody] = useState<IBodyEditorData | null>(null);
+  const [response, setResponse] = useState<
+    AxiosResponse<unknown, unknown> | undefined
+  >();
+
+  useEffect(() => {
+    setUrlSdl(`${url}?sdl`);
+  }, [url]);
+
+  const isAxiosResponse = (
+    response: AxiosResponse<unknown, unknown> | undefined,
+  ) => {
+    return typeof response !== 'undefined' && 'status' in response;
+  };
+
+  const handleChangeUrlSdl = (e: React.ChangeEvent<HTMLInputElement>): void => {
+    const { value } = e?.target || {};
+
+    setUrlSdl(value);
+  };
 
   const handleSendRequest = async (): Promise<void> => {
-    // eslint-disable-next-line no-console
-    console.log(headers);
+    const DATA: IRequestData = {
+      method,
+      url,
+      headers,
+      data: body ? body.body : body,
+    };
+
+    const response = await sendRequest(DATA);
+
+    const isSuccessfull: boolean =
+      response?.status !== undefined && response.status < 300;
+
+    dispatch(
+      showAlert({
+        alert: true,
+        style: isSuccessfull ? AlertStyle.success : AlertStyle.error,
+        alertText: isSuccessfull
+          ? 'Request completed successfully !'
+          : 'Request is failed',
+      }),
+    );
+
+    setResponse(response);
   };
+
+  const isRequestRequired: boolean =
+    method === ICRUD.POST || method === ICRUD.PUT ? !body || !url : !url;
 
   return (
     <Box width="50em">
-      <h2>Graph QL</h2>
-      <MethodEditor method={method} setMethod={setMethod} />
+      <div>
+        <h2>Graph QL</h2>
+        <MethodEditor method={method} setMethod={setMethod} />
 
-      <UrlEditor
-        url={url}
-        setUrl={setUrl}
-        method={method}
-        headers={headers}
-        body={null}
-      />
+        <UrlEditor
+          url={url}
+          setUrl={setUrl}
+          method={method}
+          headers={headers}
+          body={body}
+        />
 
-      <HeaderEditor setHeaders={setHeaders} />
+        <TextField
+          fullWidth
+          margin="normal"
+          label="SDL endpoint"
+          value={urlSdl}
+          onChange={handleChangeUrlSdl}
+          size="small"
+        />
 
-      <Button variant="contained" color="primary" onClick={handleSendRequest}>
-        Send Request
-      </Button>
+        <HeaderEditor setHeaders={setHeaders} />
+
+        <BodyEditor setBody={setBody} />
+
+        <Button
+          disabled={isRequestRequired}
+          variant="contained"
+          color="primary"
+          onClick={handleSendRequest}
+        >
+          Send Request
+        </Button>
+      </div>
+      {response && (
+        <div style={{ width: '50em', overflow: 'hidden', marginTop: '1em' }}>
+          <Typography variant="h6">Response</Typography>
+          <Typography>
+            Status: {isAxiosResponse(response) ? response.status : 'No status'}
+          </Typography>
+          <pre
+            style={{
+              maxWidth: '100%',
+              whiteSpace: 'pre-wrap',
+              wordWrap: 'break-word',
+            }}
+          >
+            {JSON.stringify(response, null, 2)}
+          </pre>
+        </div>
+      )}
     </Box>
   );
 };

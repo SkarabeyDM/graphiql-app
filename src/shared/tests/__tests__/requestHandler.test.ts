@@ -1,4 +1,4 @@
-import { sendRequest } from '@widgets/restFullClient/lib/requestHandler';
+import { sendRequest } from '@shared/lib/requestHandler';
 import { ICRUD } from '@features/editor/model/methodEditorModel';
 import { IRequestData } from '@widgets/restFullClient/model/requestHandlerModel';
 import axios from 'axios';

@@ -10,7 +10,7 @@ import { AxiosResponse } from 'axios';
 import { useAppDispatch } from '@shared/redux';
 import { showAlert } from '@shared/redux/slices/alertSlice';
 import { AlertStyle } from '@widgets/alert/model/Alert.model';
-import { sendRequest } from '../lib/requestHandler';
+import { sendRequest } from '../../../shared/lib/requestHandler';
 import { HeaderEditor, MethodEditor, UrlEditor } from '@features/editor';
 
 const RestFullClient: FC = () => {
