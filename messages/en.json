@@ -13,5 +13,9 @@
     "restfull": "RESTfull",
     "graphiql": "GraphiQL",
     "history": "History"
+  },
+  "Greetings": {
+    "welcome": "Welcome!",
+    "welcomeBack": "Welcome back, [username]!"
   }
 }
