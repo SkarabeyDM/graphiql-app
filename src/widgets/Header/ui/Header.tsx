@@ -3,8 +3,8 @@
 import { useAuthState } from '@entities/user';
 import { LogoutButton } from '@features/auth';
 import { LanguageSelect } from '@features/internationalization';
-import { AppBar, Stack } from '@mui/material';
-import { Link } from '@shared/ui';
+import { AppBar, ButtonGroup, Stack } from '@mui/material';
+import { Button, Link } from '@shared/ui';
 import { useTranslations } from 'next-intl';
 import Image from 'next/image';
 import { FC } from 'react';
@@ -25,16 +25,16 @@ export const Header: FC = () => {
         <Link href="/">
           <Image src="/images/logo.svg" alt="logo" width={40} height={40} />
         </Link>
-        <Stack direction="row" gap={2} alignItems="center">
+        <Stack direction="row" gap={2}>
+          <LanguageSelect />
           {user ? (
             <LogoutButton />
           ) : (
-            <>
-              <Link href="/login">{t('login')}</Link>/
-              <Link href="/register">{t('register')}</Link>
-            </>
+            <ButtonGroup>
+              <Button href="/login">{t('login')}</Button>
+              <Button href="/register">{t('register')}</Button>
+            </ButtonGroup>
           )}
-          <LanguageSelect />
         </Stack>
       </Stack>
     </AppBar>
