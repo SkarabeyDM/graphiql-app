@@ -8,5 +8,10 @@
     "confirmPassword": "Подтвердите пароль",
     "successfulRegistration": "Успешная регистрация",
     "successfulLogin": "Успешная авторизация"
+  },
+  "Editors": {
+    "restfull": "RESTfull",
+    "graphiql": "GraphiQL",
+    "history": "История"
   }
 }

@@ -8,5 +8,10 @@
     "confirmPassword": "Confirm password",
     "successfulRegistration": "Successful registration",
     "successfulLogin": "Successful authorization"
+  },
+  "Editors": {
+    "restfull": "RESTfull",
+    "graphiql": "GraphiQL",
+    "history": "History"
   }
 }
