@@ -25,13 +25,15 @@ export const Header: FC = () => {
         <Link href="/">
           <Image src="/images/logo.svg" alt="logo" width={40} height={40} />
         </Link>
-        <Stack direction="row" gap={2}>
+        <Stack direction="row" gap={2} overflow={'auto'}>
           <LanguageSelect />
           {user ? (
             <LogoutButton />
           ) : (
             <ButtonGroup>
-              <Button href="/login">{t('login')}</Button>
+              <Button variant="contained" href="/login">
+                {t('login')}
+              </Button>
               <Button href="/register">{t('register')}</Button>
             </ButtonGroup>
           )}
