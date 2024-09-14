@@ -1,10 +1,13 @@
 import { PrivateRoute } from '@entities/user';
+import { Container } from '@mui/material';
 import { RestFullClient } from '@widgets/restFullClient';
 
 export const RestFullClientPage = () => {
   return (
     <PrivateRoute fallbackUrl="/login" requireAuth>
-      <RestFullClient />
+      <Container component="main">
+        <RestFullClient />
+      </Container>
     </PrivateRoute>
   );
 };
