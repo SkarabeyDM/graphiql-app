@@ -38,7 +38,7 @@ export const RootLayout = async ({
             <NextIntlClientProvider messages={messages}>
               <Header />
               <Alert />
-              {children}
+              <Box py={2}>{children}</Box>
               <Footer />
             </NextIntlClientProvider>
           </Stack>
