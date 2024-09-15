@@ -1,7 +1,6 @@
 import { IRequestData } from '@shared/model/requestHandlerModel';
 
 export const createUrlFromRequest = ({
-  method,
   url,
   headers,
   data,
@@ -20,5 +19,5 @@ export const createUrlFromRequest = ({
     });
   }
 
-  return `${method} ${urlObj.toString()}`;
+  return `${urlObj.toString()}`;
 };
