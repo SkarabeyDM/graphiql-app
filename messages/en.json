@@ -1,0 +1,62 @@
+{
+  "Auth": {
+    "login": "Sign In",
+    "register": "Sign Up",
+    "logout": "Sign Out",
+    "email": "E-mail",
+    "password": "Password",
+    "confirmPassword": "Confirm password",
+    "successfulRegistration": "Successful registration",
+    "successfulLogin": "Successful authorization"
+  },
+  "Editors": {
+    "restfull": "RESTfull",
+    "graphiql": "GraphiQL",
+    "history": "History",
+    "sendRequest": "Send Request",
+    "status": "Status",
+    "noStatus": "No status",
+    "response": "Response",
+    "requestFailed": "Request failed",
+    "requestSuccessful": "Request successful",
+    "sdlEndpoint": "SDL Endpoint"
+  },
+  "UrlEditor": {
+    "endPointUrl": "Endpoint URL"
+  },
+  "BodyEditor": {
+    "body": "Body",
+    "example": "Example",
+    "invalidJson": "Invalid JSON",
+    "invalidGraphQL": "Invalid GraphQL",
+    "bodyType": "Type"
+  },
+  "MethodEditor": {
+    "method": "Method"
+  },
+  "HeaderEditor": {
+    "createHeader": "Create header",
+    "key": "Key",
+    "value": "Value"
+  },
+  "Greetings": {
+    "welcome": "Welcome!",
+    "welcomeBack": "Welcome back, [username]!"
+  },
+  "Authors": {
+    "authors": {
+      "Jamal": {
+        "name": "Jamal",
+        "description": "Team lead. Set up boards and repository, made private routes and main page, added internationalization. Participated in PR discussions."
+      },
+      "Mikhail": {
+        "name": "Mikhail",
+        "description": "Set up the project, firebase and deployment, made query editors and authentication forms. I wrote tests. Participated in PR discussions."
+      },
+      "Natalia": {
+        "name": "Natalia",
+        "description": "Created the application layout in Figma."
+      }
+    }
+  }
+}
