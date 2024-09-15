@@ -1,7 +1,7 @@
 import type { Metadata } from 'next';
 import { AppRouterCacheProvider } from '@mui/material-nextjs/v13-appRouter';
 import { Inter } from 'next/font/google';
-import { Box } from '@mui/material';
+import { Box, Stack } from '@mui/material';
 import { StoreProvider } from '@shared/redux';
 import { NextIntlClientProvider } from 'next-intl';
 import { getMessages } from 'next-intl/server';
@@ -28,7 +28,7 @@ export const RootLayout = async ({
     <StoreProvider>
       <AppRouterCacheProvider>
         <Box component="html" height="100%" lang={locale}>
-          <Box
+          <Stack
             component="body"
             m={0}
             height="100%"
@@ -38,10 +38,10 @@ export const RootLayout = async ({
             <NextIntlClientProvider messages={messages}>
               <Header />
               <Alert />
-              {children}
+              <Box py={2}>{children}</Box>
               <Footer />
             </NextIntlClientProvider>
-          </Box>
+          </Stack>
         </Box>
       </AppRouterCacheProvider>
     </StoreProvider>

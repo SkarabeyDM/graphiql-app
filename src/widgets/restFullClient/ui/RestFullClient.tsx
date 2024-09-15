@@ -62,7 +62,7 @@ const RestFullClient: FC = () => {
     method === ICRUD.POST || method === ICRUD.PUT ? !body || !url : !url;
 
   return (
-    <Box width="50em">
+    <Box>
       <h2>RESTfull client</h2>
 
       <MethodManager method={method} setMethod={setMethod} />
@@ -89,7 +89,7 @@ const RestFullClient: FC = () => {
       </Button>
 
       {response && (
-        <Box width="50em" overflow="hidden" marginTop={2}>
+        <Box overflow="hidden" marginTop={2}>
           <Typography variant="h6">Response</Typography>
           <Typography>
             Status: {isAxiosResponse(response) ? response.status : 'No status'}

@@ -1,23 +1,32 @@
-import { Typography } from '@mui/material';
-import Grid from '@mui/material/Unstable_Grid2';
+'use client';
+import { useAuthState } from '@entities/user';
+import { EditorsGroup } from '@features/editor/ui';
+import { Container, Stack } from '@mui/material';
+import { Button } from '@shared/ui';
+import { Authors } from '@widgets/Authors';
+import { Greeting } from '@widgets/Greeting';
+import { useTranslations } from 'next-intl';
 
 export const HomePage = () => {
+  const t = useTranslations('Auth');
+  const [user] = useAuthState();
+
   return (
-    <Grid
-      container
-      direction="column"
-      justifyContent="center"
-      alignItems="center"
-      minHeight="100vh"
-      width="100%"
-      spacing={4}
-      sx={{ m: 0, position: 'relative' }}
-    >
-      <Grid>
-        <Typography variant="h4" fontWeight="bold" fontStyle="italic">
-          REST/GraphiQL Client
-        </Typography>
-      </Grid>
-    </Grid>
+    <Container>
+      <Stack gap={2} alignItems={'center'}>
+        <Greeting />
+        {user ? (
+          <EditorsGroup />
+        ) : (
+          <Stack direction="row" gap={5}>
+            <Button variant="contained" href="/login">
+              {t('login')}
+            </Button>
+            <Button href="/register">{t('register')}</Button>
+          </Stack>
+        )}
+        <Authors />
+      </Stack>
+    </Container>
   );
 };

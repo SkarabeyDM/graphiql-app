@@ -6,11 +6,13 @@ import { FC } from 'react';
 export const Footer: FC = () => {
   return (
     <Stack
+      component="footer"
       direction="row"
       gap={2}
       p={2}
       justifyContent={'space-between'}
       alignItems="center"
+      marginTop="auto"
     >
       <IconButton
         href="https://github.com/SkarabeyDM/graphiql-app"
