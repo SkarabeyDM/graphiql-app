@@ -4,10 +4,10 @@ import OneHeaderElement from './OneHeaderElement';
 import {
   IHeadersData,
   IHeadersItem,
-  IheadersProps,
+  IHeadersProps,
 } from '../model/headersEditorModel';
 
-export const HeaderEditor: FC<IheadersProps> = ({ setHeaders }) => {
+export const HeaderEditor: FC<IHeadersProps> = ({ setHeaders }) => {
   const [count, setCount] = useState<number>(1);
   const [items, setItems] = useState<IHeadersItem[]>([]);
 

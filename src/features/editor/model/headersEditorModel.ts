@@ -4,7 +4,7 @@ export interface IHeadersData {
   [key: string]: string;
 }
 
-export interface IheadersProps {
+export interface IHeadersProps {
   setHeaders: Dispatch<SetStateAction<IHeadersData>>;
 }
 
