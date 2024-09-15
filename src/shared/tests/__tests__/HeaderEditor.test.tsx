@@ -1,19 +1,19 @@
 import '@testing-library/jest-dom';
 import { act, fireEvent, screen, waitFor } from '@testing-library/react';
 import { renderWithProviders } from '../lib';
-import HeaderManager from '@widgets/restFullClient/ui/HeaderManager';
-import { IheadersProps } from '@widgets/restFullClient/model/headerManagerModel';
+import { IheadersProps } from '@features/editor/model/headersEditorModel';
+import { HeaderEditor } from '@features/editor';
 
-describe('HeaderManager component', () => {
+describe('HeaderEditor component', () => {
   const renderComponent = (props: Partial<IheadersProps> = {}) => {
     const defaultProps: IheadersProps = {
       setHeaders: jest.fn(),
     };
-    return renderWithProviders(<HeaderManager {...defaultProps} {...props} />);
+    return renderWithProviders(<HeaderEditor {...defaultProps} {...props} />);
   };
 
   /**
-   * Тест для компонента HeaderManager.
+   * Тест для компонента HeaderEditor.
    * Проверяет, что создается новый элемент заголовка при нажатии на кнопку.
    *
    * @returns {Promise<void>}
@@ -34,7 +34,7 @@ describe('HeaderManager component', () => {
   });
 
   /**
-   * Тест для компонента HeaderManager.
+   * Тест для компонента HeaderEditor.
    * Проверяет, что функция setHeaders вызывается с обновленными заголовками.
    *
    * @returns {Promise<void>}

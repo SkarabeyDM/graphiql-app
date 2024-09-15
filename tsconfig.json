@@ -34,7 +34,7 @@
     "**/*.ts",
     "**/*.tsx",
     ".next/types/**/*.ts",
-    "src/widgets/authorization/ui/VisibilityButton.tsx"
+    "src/widgets/graphQl/model/graphqlPrettier.d.ts"
   ],
   "exclude": ["node_modules"]
 }

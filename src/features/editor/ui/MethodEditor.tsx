@@ -5,10 +5,10 @@ import {
   Select,
   SelectChangeEvent,
 } from '@mui/material';
-import { ICRUD, IMethodProps } from '../model/methodManagerModel';
+import { ICRUD, IMethodProps } from '../model/methodEditorModel';
 import { FC } from 'react';
 
-const MethodManager: FC<IMethodProps> = ({ method, setMethod }) => {
+export const MethodEditor: FC<IMethodProps> = ({ method, setMethod }) => {
   const handleChange = (e: SelectChangeEvent<string>): void => {
     const { value } = e?.target || {};
 
@@ -38,5 +38,3 @@ const MethodManager: FC<IMethodProps> = ({ method, setMethod }) => {
     </FormControl>
   );
 };
-
-export default MethodManager;

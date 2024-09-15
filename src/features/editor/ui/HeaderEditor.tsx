@@ -5,9 +5,9 @@ import {
   IHeadersData,
   IHeadersItem,
   IheadersProps,
-} from '../model/headerManagerModel';
+} from '../model/headersEditorModel';
 
-const HeaderManager: FC<IheadersProps> = ({ setHeaders }) => {
+export const HeaderEditor: FC<IheadersProps> = ({ setHeaders }) => {
   const [count, setCount] = useState<number>(1);
   const [items, setItems] = useState<IHeadersItem[]>([]);
 
@@ -19,12 +19,16 @@ const HeaderManager: FC<IheadersProps> = ({ setHeaders }) => {
 
   useEffect(() => {
     const newHeaders: IHeadersData = items.reduce(
-      (object: IHeadersData, el: IHeadersItem) => {
-        return { ...object, [el.data.key]: el.data.value };
-      },
+      (object: IHeadersData, el: IHeadersItem) =>
+        el.data.key
+          ? { ...object, [el.data.key]: el.data.value }
+          : { ...object },
       {},
     );
-    setHeaders(newHeaders);
+
+    const isHeaders = Object.keys(newHeaders)[0];
+
+    isHeaders ? setHeaders(newHeaders) : setHeaders({});
   }, [items]);
 
   return (
@@ -44,5 +48,3 @@ const HeaderManager: FC<IheadersProps> = ({ setHeaders }) => {
     </Box>
   );
 };
-
-export default HeaderManager;

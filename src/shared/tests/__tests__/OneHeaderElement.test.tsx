@@ -1,8 +1,8 @@
 import '@testing-library/jest-dom';
 import { screen } from '@testing-library/react';
 import { renderWithProviders } from '../lib';
-import OneHeaderElement from '@widgets/restFullClient/ui/OneHeaderElement';
-import { IHeadersElementProps } from '@widgets/restFullClient/model/headerManagerModel';
+import { IHeadersElementProps } from '@features/editor/model/headersEditorModel';
+import OneHeaderElement from '@features/editor/ui/OneHeaderElement';
 
 describe('OneHeaderElement component', () => {
   const renderComponent = (props: Partial<IHeadersElementProps> = {}) => {

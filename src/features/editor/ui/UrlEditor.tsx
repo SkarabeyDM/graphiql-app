@@ -1,16 +1,23 @@
 import { Box, TextField } from '@mui/material';
-import { IUrlProps } from '../model/urlManagerModel';
-import { ICRUD } from '../model/methodManagerModel';
-import { IHeadersData } from '../model/headerManagerModel';
-import { IBodyData } from '../model/bodyManagerModel';
+import { IUrlProps } from '../model/urlEditorModel';
+import { ICRUD } from '../model/methodEditorModel';
+import { IHeadersData } from '../model/headersEditorModel';
 import { FC } from 'react';
-import { encodeBase64 } from '../lib/encodeBase64';
+import { IBodyData } from '@widgets/restFullClient/model/bodyManagerModel';
+import { encodeBase64 } from '@features/editor/lib/encodeBase64';
+import { IBodyEditorData } from '@widgets/graphQl/model/bodyEditorModel';
 
-const UrlManager: FC<IUrlProps> = ({ url, setUrl, method, headers, body }) => {
+export const UrlEditor: FC<IUrlProps> = ({
+  url,
+  setUrl,
+  method,
+  headers,
+  body,
+}) => {
   const urlFormation = (
     method: ICRUD,
     headers: IHeadersData,
-    body: IBodyData | null,
+    body: IBodyData | IBodyEditorData | null,
   ): string => {
     const encodedBody = !body ? '' : encodeBase64(JSON.stringify(body));
 
@@ -25,9 +32,6 @@ const UrlManager: FC<IUrlProps> = ({ url, setUrl, method, headers, body }) => {
   const handleChange = (e: React.ChangeEvent<HTMLInputElement>): void => {
     const { value } = e?.target || {};
 
-    if (!value) {
-      return;
-    }
     setUrl(value);
   };
 
@@ -50,5 +54,3 @@ const UrlManager: FC<IUrlProps> = ({ url, setUrl, method, headers, body }) => {
     </Box>
   );
 };
-
-export default UrlManager;

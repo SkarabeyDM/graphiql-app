@@ -1,5 +1,5 @@
 import axios from 'axios';
-import { IRequestData } from '../model/requestHandlerModel';
+import { IRequestData } from '../../widgets/restFullClient/model/requestHandlerModel';
 
 export const sendRequest = async ({
   method,
@@ -12,7 +12,12 @@ export const sendRequest = async ({
       method,
       url,
       headers,
-      data,
+      data:
+        typeof data === 'string'
+          ? {
+              query: data,
+            }
+          : data,
     });
     return response;
   } catch (error) {
