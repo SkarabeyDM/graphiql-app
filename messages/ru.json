@@ -14,6 +14,9 @@
     "graphiql": "GraphiQL",
     "history": "История"
   },
+  "MethodEditor": {
+    "method": "Метод"
+  },
   "HeaderEditor": {
     "createHeader": "Создать заголовок",
     "key": "Ключ",
