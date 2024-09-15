@@ -1,6 +1,6 @@
 'use client';
 import { FC, useState } from 'react';
-import { Box, Button, Typography } from '@mui/material';
+import { Box, Button, Container, Typography } from '@mui/material';
 import BodyManager from './BodyManager';
 import { ICRUD } from '../../../features/editor/model/methodEditorModel';
 import { IBodyData } from '../model/bodyManagerModel';
@@ -60,8 +60,10 @@ const RestFullClient: FC = () => {
     method === ICRUD.POST || method === ICRUD.PUT ? !body || !url : !url;
 
   return (
-    <Box width="50em">
-      <h2>RESTfull client</h2>
+    <Container maxWidth="sm">
+      <Typography variant="h5" fontWeight="500" marginBottom="0.5em">
+        RESTfull client
+      </Typography>
 
       <MethodEditor method={method} setMethod={setMethod} />
 
@@ -103,7 +105,7 @@ const RestFullClient: FC = () => {
           </pre>
         </Box>
       )}
-    </Box>
+    </Container>
   );
 };
 

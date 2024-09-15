@@ -3,7 +3,7 @@ import { GraphQl } from '@widgets/graphQl';
 
 export const GraphQlPage = () => {
   return (
-    <PrivateRoute fallbackUrl="/login" requireAuth>
+    <PrivateRoute fallbackUrl="editor/graphiql" requireAuth>
       <GraphQl />
     </PrivateRoute>
   );

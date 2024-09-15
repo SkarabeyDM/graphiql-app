@@ -2,7 +2,7 @@
 import { HeaderEditor, MethodEditor, UrlEditor } from '@features/editor';
 import { IHeadersData } from '@features/editor/model/headersEditorModel';
 import { ICRUD } from '@features/editor/model/methodEditorModel';
-import { Box, Button, TextField, Typography } from '@mui/material';
+import { Box, Button, Container, TextField, Typography } from '@mui/material';
 import { FC, useEffect, useState } from 'react';
 import BodyEditor from './BodyEditor';
 import { IBodyEditorData } from '../model/bodyEditorModel';
@@ -26,7 +26,7 @@ const GraphQl: FC = () => {
   >();
 
   useEffect(() => {
-    setUrlSdl(`${url}?sdl`);
+    setUrlSdl(url ? `${url}?sdl` : '');
   }, [url]);
 
   const isAxiosResponse = (
@@ -71,9 +71,11 @@ const GraphQl: FC = () => {
     method === ICRUD.POST || method === ICRUD.PUT ? !body || !url : !url;
 
   return (
-    <Box width="50em">
-      <div>
-        <h2>Graph QL</h2>
+    <Container maxWidth="sm">
+      <Box>
+        <Typography variant="h5" fontWeight="500" marginBottom="0.5em">
+          Graph QL
+        </Typography>
         <MethodEditor method={method} setMethod={setMethod} />
 
         <UrlEditor
@@ -105,9 +107,9 @@ const GraphQl: FC = () => {
         >
           Send Request
         </Button>
-      </div>
+      </Box>
       {response && (
-        <div style={{ width: '50em', overflow: 'hidden', marginTop: '1em' }}>
+        <Box width="50em" overflow="hidden" marginTop="1em">
           <Typography variant="h6">Response</Typography>
           <Typography>
             Status: {isAxiosResponse(response) ? response.status : 'No status'}
@@ -121,9 +123,9 @@ const GraphQl: FC = () => {
           >
             {JSON.stringify(response, null, 2)}
           </pre>
-        </div>
+        </Box>
       )}
-    </Box>
+    </Container>
   );
 };
 

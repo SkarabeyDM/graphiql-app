@@ -16,6 +16,7 @@ import {
   IBodyType,
 } from '../model/bodyEditorModel';
 import gqlPrettier from 'graphql-prettier';
+import { format } from 'graphql-formatter';
 
 const BodyEditor: FC<IBodyEditorProps> = ({ setBody }) => {
   const [type, setType] = useState<IBodyType>(IBodyType.JSON);
@@ -34,18 +35,15 @@ const BodyEditor: FC<IBodyEditorProps> = ({ setBody }) => {
   };
 
   const prettifyQuery = (): void => {
-    setError('');
-
     try {
       if (type === IBodyType.GraphQL) {
         const prettifiedQuery: IBodyOfGraphQl = gqlPrettier(graphQL);
 
         setGraphQl(prettifiedQuery);
-        setBody({ type: IBodyType.GraphQL, body: prettifiedQuery });
       } else {
-        const parsed: IBodyOfJson = JSON.parse(json);
+        const result = format(json);
 
-        setBody({ type: IBodyType.JSON, body: parsed });
+        setJson(result);
       }
     } catch (error) {
       setError(
@@ -53,22 +51,37 @@ const BodyEditor: FC<IBodyEditorProps> = ({ setBody }) => {
           ? 'Invalid GraphQL query...'
           : 'Invalid JSON...',
       );
-      setBody(null);
     }
   };
 
   const handleChangeOfJson = (e: React.ChangeEvent<HTMLInputElement>): void => {
+    setError('');
     const { value } = e?.target || {};
-
     setJson(value);
+
+    try {
+      const parsed: IBodyOfJson = JSON.parse(value);
+      setBody({ type: IBodyType.JSON, body: parsed });
+    } catch {
+      setError('Invalid JSON...');
+      setBody(null);
+    }
   };
 
   const handleChangeOfGraphQl = (
     e: React.ChangeEvent<HTMLInputElement>,
   ): void => {
+    setError('');
     const { value } = e?.target || {};
-
     setGraphQl(value);
+
+    try {
+      const prettifiedQuery: IBodyOfGraphQl = gqlPrettier(value);
+      setBody({ type: IBodyType.GraphQL, body: prettifiedQuery });
+    } catch {
+      setError('Invalid GraphQL query...');
+      setBody(null);
+    }
   };
 
   useEffect(() => {
@@ -80,13 +93,7 @@ const BodyEditor: FC<IBodyEditorProps> = ({ setBody }) => {
 
   return (
     <Box margin="1em 0">
-      <div
-        style={{
-          marginBottom: '0.5em',
-          display: 'flex',
-          justifyContent: 'space-around',
-        }}
-      >
+      <Box marginBottom="0.5em" display="flex" justifyContent="space-around">
         <FormControl fullWidth>
           <InputLabel id="demo-simple-select-label">Type</InputLabel>
           <Select
@@ -104,7 +111,7 @@ const BodyEditor: FC<IBodyEditorProps> = ({ setBody }) => {
         <Button onClick={prettifyQuery} variant="contained" color="primary">
           Prettify
         </Button>
-      </div>
+      </Box>
       {type === IBodyType.JSON ? (
         <TextField
           label="Body"
