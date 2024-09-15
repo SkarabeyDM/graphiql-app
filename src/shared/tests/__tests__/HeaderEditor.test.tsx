@@ -1,12 +1,12 @@
 import '@testing-library/jest-dom';
 import { act, fireEvent, screen, waitFor } from '@testing-library/react';
 import { renderWithProviders } from '../lib';
-import { IheadersProps } from '@features/editor/model/headersEditorModel';
+import { IHeadersProps } from '@features/editor/model/headersEditorModel';
 import { HeaderEditor } from '@features/editor';
 
 describe('HeaderEditor component', () => {
-  const renderComponent = (props: Partial<IheadersProps> = {}) => {
-    const defaultProps: IheadersProps = {
+  const renderComponent = (props: Partial<IHeadersProps> = {}) => {
+    const defaultProps: IHeadersProps = {
       setHeaders: jest.fn(),
     };
     return renderWithProviders(<HeaderEditor {...defaultProps} {...props} />);

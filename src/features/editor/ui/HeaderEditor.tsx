@@ -1,13 +1,16 @@
+'use client';
 import { useState, useEffect, FC } from 'react';
 import { Box, Button } from '@mui/material';
 import OneHeaderElement from './OneHeaderElement';
 import {
   IHeadersData,
   IHeadersItem,
-  IheadersProps,
+  IHeadersProps,
 } from '../model/headersEditorModel';
+import { useTranslations } from 'next-intl';
 
-export const HeaderEditor: FC<IheadersProps> = ({ setHeaders }) => {
+export const HeaderEditor: FC<IHeadersProps> = ({ setHeaders }) => {
+  const t = useTranslations('HeaderEditor');
   const [count, setCount] = useState<number>(1);
   const [items, setItems] = useState<IHeadersItem[]>([]);
 
@@ -38,9 +41,9 @@ export const HeaderEditor: FC<IheadersProps> = ({ setHeaders }) => {
         data-testid="Create Header"
         variant="contained"
       >
-        Create Header
+        {t('createHeader')}
       </Button>
-      <Box margin="0.5em 0">
+      <Box>
         {items.map(({ id }: IHeadersItem) => (
           <OneHeaderElement key={id} id={id} setItems={setItems} />
         ))}

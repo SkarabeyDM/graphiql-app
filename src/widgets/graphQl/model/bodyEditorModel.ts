@@ -1,6 +1,6 @@
 import { Dispatch, SetStateAction } from 'react';
 
-export enum IBodyType {
+export enum BodyType {
   JSON = 'JSON',
   GraphQL = 'GraphQL',
 }
@@ -11,7 +11,7 @@ export interface IBodyOfJson {
 }
 
 export interface IBodyEditorData {
-  type: IBodyType;
+  type: BodyType;
   body: IBodyOfGraphQl | IBodyOfJson;
 }
 

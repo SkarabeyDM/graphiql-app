@@ -1,11 +1,11 @@
 import {
-  Box,
-  Button,
   FormControl,
+  IconButton,
   InputLabel,
   MenuItem,
   Select,
   SelectChangeEvent,
+  Stack,
   TextField,
 } from '@mui/material';
 import { FC, useEffect, useState } from 'react';
@@ -13,13 +13,17 @@ import {
   IBodyEditorProps,
   IBodyOfGraphQl,
   IBodyOfJson,
-  IBodyType,
+  BodyType,
 } from '../model/bodyEditorModel';
 import gqlPrettier from 'graphql-prettier';
 import { format } from 'graphql-formatter';
+import { AutoAwesome } from '@mui/icons-material';
+import { useTranslations } from 'next-intl';
+import { examples } from '@features/editor/lib';
 
 const BodyEditor: FC<IBodyEditorProps> = ({ setBody }) => {
-  const [type, setType] = useState<IBodyType>(IBodyType.JSON);
+  const t = useTranslations('BodyEditor');
+  const [type, setType] = useState<BodyType>(BodyType.JSON);
   const [graphQL, setGraphQl] = useState<string>('');
   const [json, setJson] = useState<string>('');
   const [error, setError] = useState<string>('');
@@ -31,12 +35,12 @@ const BodyEditor: FC<IBodyEditorProps> = ({ setBody }) => {
       return;
     }
 
-    setType(value as IBodyType);
+    setType(value as BodyType);
   };
 
   const prettifyQuery = (): void => {
     try {
-      if (type === IBodyType.GraphQL) {
+      if (type === BodyType.GraphQL) {
         const prettifiedQuery: IBodyOfGraphQl = gqlPrettier(graphQL);
 
         setGraphQl(prettifiedQuery);
@@ -46,11 +50,7 @@ const BodyEditor: FC<IBodyEditorProps> = ({ setBody }) => {
         setJson(result);
       }
     } catch (error) {
-      setError(
-        type === IBodyType.GraphQL
-          ? 'Invalid GraphQL query...'
-          : 'Invalid JSON...',
-      );
+      setError(t(type === BodyType.GraphQL ? 'invalidGraphQL' : 'invalidJson'));
     }
   };
 
@@ -61,9 +61,9 @@ const BodyEditor: FC<IBodyEditorProps> = ({ setBody }) => {
 
     try {
       const parsed: IBodyOfJson = JSON.parse(value);
-      setBody({ type: IBodyType.JSON, body: parsed });
+      setBody({ type: BodyType.JSON, body: parsed });
     } catch {
-      setError('Invalid JSON...');
+      setError(t('invalidJson'));
       setBody(null);
     }
   };
@@ -77,9 +77,9 @@ const BodyEditor: FC<IBodyEditorProps> = ({ setBody }) => {
 
     try {
       const prettifiedQuery: IBodyOfGraphQl = gqlPrettier(value);
-      setBody({ type: IBodyType.GraphQL, body: prettifiedQuery });
+      setBody({ type: BodyType.GraphQL, body: prettifiedQuery });
     } catch {
-      setError('Invalid GraphQL query...');
+      setError(t('invalidGraphQL'));
       setBody(null);
     }
   };
@@ -92,30 +92,30 @@ const BodyEditor: FC<IBodyEditorProps> = ({ setBody }) => {
   }, [type]);
 
   return (
-    <Box margin="1em 0">
-      <Box marginBottom="0.5em" display="flex" justifyContent="space-around">
+    <Stack pt={1} gap={1}>
+      <Stack direction="row" gap={1}>
         <FormControl fullWidth>
-          <InputLabel id="demo-simple-select-label">Type</InputLabel>
+          <InputLabel id="demo-simple-select-label">{t('bodyType')}</InputLabel>
           <Select
             labelId="body-type-select-label"
             id="body-type-select"
             value={type}
-            label="Type"
+            label={t('bodyType')}
             onChange={handleChangeType}
           >
-            <MenuItem value={IBodyType.JSON}>{IBodyType.JSON}</MenuItem>
-            <MenuItem value={IBodyType.GraphQL}>{IBodyType.GraphQL}</MenuItem>
+            <MenuItem value={BodyType.JSON}>{BodyType.JSON}</MenuItem>
+            <MenuItem value={BodyType.GraphQL}>{BodyType.GraphQL}</MenuItem>
           </Select>
         </FormControl>
 
-        <Button onClick={prettifyQuery} variant="contained" color="primary">
-          Prettify
-        </Button>
-      </Box>
-      {type === IBodyType.JSON ? (
+        <IconButton onClick={prettifyQuery} color="primary">
+          <AutoAwesome />
+        </IconButton>
+      </Stack>
+      {type === BodyType.JSON ? (
         <TextField
-          label="Body"
-          placeholder={`Example: {"model":"Cooper"}`}
+          label={t('body')}
+          placeholder={`${t('example')}: ${examples.json}`}
           fullWidth
           multiline
           rows={3}
@@ -125,13 +125,8 @@ const BodyEditor: FC<IBodyEditorProps> = ({ setBody }) => {
         />
       ) : (
         <TextField
-          label="Body"
-          placeholder={`Example: query Viewer {
-                user {
-                    id
-                    name
-                  }
-              }`}
+          label={t('body')}
+          placeholder={`${t('example')}: ${examples.graphql}`}
           fullWidth
           multiline
           rows={6}
@@ -140,7 +135,7 @@ const BodyEditor: FC<IBodyEditorProps> = ({ setBody }) => {
           helperText={error}
         />
       )}
-    </Box>
+    </Stack>
   );
 };
 

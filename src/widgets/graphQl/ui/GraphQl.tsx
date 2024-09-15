@@ -2,7 +2,14 @@
 import { HeaderEditor, MethodEditor, UrlEditor } from '@features/editor';
 import { IHeadersData } from '@features/editor/model/headersEditorModel';
 import { ICRUD } from '@features/editor/model/methodEditorModel';
-import { Box, Button, Container, TextField, Typography } from '@mui/material';
+import {
+  Box,
+  Button,
+  Container,
+  Stack,
+  TextField,
+  Typography,
+} from '@mui/material';
 import { FC, useEffect, useState } from 'react';
 import BodyEditor from './BodyEditor';
 import { IBodyEditorData } from '../model/bodyEditorModel';
@@ -12,8 +19,10 @@ import { showAlert } from '@shared/redux/slices/alertSlice';
 import { AlertStyle } from '@widgets/alert/model/Alert.model';
 import { useAppDispatch } from '@shared/redux';
 import { EditorType, IRequestData } from '@shared/model/requestHandlerModel';
+import { useTranslations } from 'next-intl';
 
 const GraphQl: FC = () => {
+  const t = useTranslations('Editors');
   const dispatch = useAppDispatch();
 
   const [method, setMethod] = useState<ICRUD>(ICRUD.GET);
@@ -51,16 +60,14 @@ const GraphQl: FC = () => {
 
     const response = await sendRequest(EditorType.GraphQL, DATA);
 
-    const isSuccessfull: boolean =
+    const isSuccessful: boolean =
       response?.status !== undefined && response.status < 300;
 
     dispatch(
       showAlert({
         alert: true,
-        style: isSuccessfull ? AlertStyle.success : AlertStyle.error,
-        alertText: isSuccessfull
-          ? 'Request completed successfully !'
-          : 'Request is failed',
+        style: isSuccessful ? AlertStyle.success : AlertStyle.error,
+        alertText: t(isSuccessful ? 'requestSuccessful' : 'requestFailed'),
       }),
     );
 
@@ -72,7 +79,7 @@ const GraphQl: FC = () => {
 
   return (
     <Container maxWidth="sm">
-      <Box>
+      <Stack spacing={2}>
         <Typography variant="h5" fontWeight="500" marginBottom="0.5em">
           Graph QL
         </Typography>
@@ -89,7 +96,7 @@ const GraphQl: FC = () => {
         <TextField
           fullWidth
           margin="normal"
-          label="SDL endpoint"
+          label={t('sdlEndpoint')}
           value={urlSdl}
           onChange={handleChangeUrlSdl}
           size="small"
@@ -105,14 +112,14 @@ const GraphQl: FC = () => {
           color="primary"
           onClick={handleSendRequest}
         >
-          Send Request
+          {t('sendRequest')}
         </Button>
-      </Box>
+      </Stack>
       {response && (
         <Box width="50em" overflow="hidden" marginTop="1em">
-          <Typography variant="h6">Response</Typography>
+          <Typography variant="h6">{t('response')}</Typography>
           <Typography>
-            Status: {isAxiosResponse(response) ? response.status : 'No status'}
+            {`${t('status')}: ${isAxiosResponse(response) ? response.status : t('noStatus')}`}
           </Typography>
           <pre
             style={{
