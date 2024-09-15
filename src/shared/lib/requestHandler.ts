@@ -1,12 +1,16 @@
+import {
+  IRequestData,
+  EditorType,
+  IRequest,
+} from '@shared/model/requestHandlerModel';
 import axios from 'axios';
-import { IRequestData } from '../../widgets/restFullClient/model/requestHandlerModel';
+import { createUrlFromRequest } from './createUrlFromRequest';
+import { localStorageAgent } from './localStorageAgent';
 
-export const sendRequest = async ({
-  method,
-  url,
-  headers,
-  data,
-}: IRequestData) => {
+export const sendRequest = async (
+  page: EditorType,
+  { method, url, headers, data }: IRequestData,
+) => {
   try {
     const response = await axios({
       method,
@@ -19,6 +23,12 @@ export const sendRequest = async ({
             }
           : data,
     });
+
+    const urlQwery = createUrlFromRequest({ method, url, headers, data });
+    const lsData: IRequest = { type: page, urlQuery: urlQwery };
+
+    localStorageAgent(lsData);
+
     return response;
   } catch (error) {
     if (axios.isAxiosError(error)) {

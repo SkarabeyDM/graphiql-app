@@ -5,13 +5,13 @@ import BodyManager from './BodyManager';
 import { ICRUD } from '../../../features/editor/model/methodEditorModel';
 import { IBodyData } from '../model/bodyManagerModel';
 import { IHeadersData } from '../../../features/editor/model/headersEditorModel';
-import { IRequestData } from '../model/requestHandlerModel';
 import { AxiosResponse } from 'axios';
 import { useAppDispatch } from '@shared/redux';
 import { showAlert } from '@shared/redux/slices/alertSlice';
 import { AlertStyle } from '@widgets/alert/model/Alert.model';
 import { sendRequest } from '../../../shared/lib/requestHandler';
 import { HeaderEditor, MethodEditor, UrlEditor } from '@features/editor';
+import { EditorType, IRequestData } from '@shared/model/requestHandlerModel';
 import { useTranslations } from 'next-intl';
 
 const RestFullClient: FC = () => {
@@ -40,7 +40,7 @@ const RestFullClient: FC = () => {
       data: body,
     };
 
-    const response = await sendRequest(DATA);
+    const response = await sendRequest(EditorType.RestClient, DATA);
 
     const isSuccessful: boolean =
       response?.status !== undefined && response.status < 300;
