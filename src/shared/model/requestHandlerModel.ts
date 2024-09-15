@@ -19,12 +19,14 @@ export interface IQueryParams {
 
 export enum EditorType {
   GraphQL = 'GraphQL',
-  RestClient = 'RestClient',
+  RestClient = 'REST',
 }
 
 export interface IRequest {
   type: EditorType;
   urlQuery: string;
+  method: ICRUD;
+  headers: IHeadersData;
 }
 
 export const LSKey = 'url-qwery-history';

@@ -24,8 +24,8 @@ export const sendRequest = async (
           : data,
     });
 
-    const urlQwery = createUrlFromRequest({ method, url, headers, data });
-    const lsData: IRequest = { type: page, urlQuery: urlQwery };
+    const urlQuery = createUrlFromRequest({ method, url, headers, data });
+    const lsData: IRequest = { type: page, urlQuery, headers, method };
 
     localStorageAgent(lsData);
 
