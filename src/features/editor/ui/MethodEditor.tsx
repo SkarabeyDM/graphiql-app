@@ -1,3 +1,4 @@
+'use client';
 import {
   FormControl,
   InputLabel,
@@ -7,8 +8,10 @@ import {
 } from '@mui/material';
 import { ICRUD, IMethodProps } from '../model/methodEditorModel';
 import { FC } from 'react';
+import { useTranslations } from 'next-intl';
 
 export const MethodEditor: FC<IMethodProps> = ({ method, setMethod }) => {
+  const t = useTranslations('MethodEditor');
   const handleChange = (e: SelectChangeEvent<string>): void => {
     const { value } = e?.target || {};
 
@@ -21,12 +24,12 @@ export const MethodEditor: FC<IMethodProps> = ({ method, setMethod }) => {
 
   return (
     <FormControl fullWidth>
-      <InputLabel id="request-method-select-label">Method</InputLabel>
+      <InputLabel id="request-method-select-label">{t('method')}</InputLabel>
       <Select
         labelId="request-method-select-label"
         id="request-method-select"
         value={method}
-        label="Method"
+        label={t('method')}
         onChange={handleChange}
       >
         {Object.values(ICRUD).map((crudValue: ICRUD) => (
