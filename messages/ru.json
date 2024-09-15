@@ -8,5 +8,30 @@
     "confirmPassword": "Подтвердите пароль",
     "successfulRegistration": "Успешная регистрация",
     "successfulLogin": "Успешная авторизация"
+  },
+  "Editors": {
+    "restfull": "RESTfull",
+    "graphiql": "GraphiQL",
+    "history": "История"
+  },
+  "Greetings": {
+    "welcome": "Добро пожаловать!",
+    "welcomeBack": "С возвращением, [username]!"
+  },
+  "Authors": {
+    "authors": {
+      "Jamal": {
+        "name": "Джамал",
+        "description": "Тимлид. Настроил доски и репозиторий, сделал приватные роуты, главную страницу и лейаут, добавил интернационализацию. Участвовал в обсуждениях PR."
+      },
+      "Mikhail": {
+        "name": "Михайл",
+        "description": "Настроил проект, firebase и деплой, сделал редакторы запросов и формы аутентификации. Писал тесты. Участвовал в обсуждениях PR."
+      },
+      "Natalia": {
+        "name": "Наталья",
+        "description": "Создала макет приложения в Figma."
+      }
+    }
   }
 }

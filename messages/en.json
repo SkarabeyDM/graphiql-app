@@ -8,5 +8,30 @@
     "confirmPassword": "Confirm password",
     "successfulRegistration": "Successful registration",
     "successfulLogin": "Successful authorization"
+  },
+  "Editors": {
+    "restfull": "RESTfull",
+    "graphiql": "GraphiQL",
+    "history": "History"
+  },
+  "Greetings": {
+    "welcome": "Welcome!",
+    "welcomeBack": "Welcome back, [username]!"
+  },
+  "Authors": {
+    "authors": {
+      "Jamal": {
+        "name": "Jamal",
+        "description": "Team lead. Set up boards and repository, made private routes and main page, added internationalization. Participated in PR discussions."
+      },
+      "Mikhail": {
+        "name": "Mikhail",
+        "description": "Set up the project, firebase and deployment, made query editors and authentication forms. I wrote tests. Participated in PR discussions."
+      },
+      "Natalia": {
+        "name": "Natalia",
+        "description": "Created the application layout in Figma."
+      }
+    }
   }
 }

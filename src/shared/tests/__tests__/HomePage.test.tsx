@@ -2,6 +2,7 @@ import '@testing-library/jest-dom';
 import { act, screen } from '@testing-library/react';
 import { renderWithProviders } from '../lib';
 import { HomePage } from '@pages/HomePage';
+import { en } from '@shared/i18n/messages';
 
 describe('HomePage component', () => {
   beforeAll(async () => {
@@ -9,13 +10,13 @@ describe('HomePage component', () => {
       renderWithProviders(<HomePage />);
     });
   });
+
   /**
    * Тест для компонента HomePage.
-   * Проверяет, что компонент рендерится с заголовком "REST/GraphiQL Client".
-
+   * Проверяет, что компонент рендерится с заголовком из `en.Greetings.welcome`.
    */
   it('renders with include the title', () => {
-    const title = screen.getByRole('heading', { name: 'REST/GraphiQL Client' });
+    const title = screen.getByRole('heading', { name: en.Greetings.welcome });
     expect(title).toBeInTheDocument();
   });
 });

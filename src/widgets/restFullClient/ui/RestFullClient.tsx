@@ -89,7 +89,7 @@ const RestFullClient: FC = () => {
       </Button>
 
       {response && (
-        <Box width="50em" overflow="hidden" marginTop={2}>
+        <Box overflow="hidden" marginTop={2}>
           <Typography variant="h6">Response</Typography>
           <Typography>
             Status: {isAxiosResponse(response) ? response.status : 'No status'}
