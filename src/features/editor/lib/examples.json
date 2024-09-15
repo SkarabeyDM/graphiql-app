@@ -1,0 +1,4 @@
+{
+  "json": "{ \"model\": \"Cooper\" }",
+  "graphql": "query Viewer {\n  user {\n    id\n    name\n  }\n}"
+}

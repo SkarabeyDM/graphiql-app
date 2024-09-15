@@ -12,10 +12,24 @@
   "Editors": {
     "restfull": "RESTfull",
     "graphiql": "GraphiQL",
-    "history": "История"
+    "history": "История",
+    "sendRequest": "Отправить запрос",
+    "status": "Статус",
+    "noStatus": "Нет статуса",
+    "response": "Ответ",
+    "requestFailed": "Запрос не удался",
+    "requestSuccessful": "Запрос успешно выполнен",
+    "sdlEndpoint": "SDL эндпоинт"
   },
   "UrlEditor": {
     "endPointUrl": "Эндпоинт URL"
+  },
+  "BodyEditor": {
+    "body": "Тело запроса",
+    "example": "Пример",
+    "invalidJson": "Невалидный JSON",
+    "invalidGraphQL": "Невалидный GraphQL",
+    "bodyType": "Тип"
   },
   "MethodEditor": {
     "method": "Метод"

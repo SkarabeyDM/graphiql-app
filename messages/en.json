@@ -12,10 +12,24 @@
   "Editors": {
     "restfull": "RESTfull",
     "graphiql": "GraphiQL",
-    "history": "History"
+    "history": "History",
+    "sendRequest": "Send Request",
+    "status": "Status",
+    "noStatus": "No status",
+    "response": "Response",
+    "requestFailed": "Request failed",
+    "requestSuccessful": "Request successful",
+    "sdlEndpoint": "SDL Endpoint"
   },
   "UrlEditor": {
     "endPointUrl": "Endpoint URL"
+  },
+  "BodyEditor": {
+    "body": "Body",
+    "example": "Example",
+    "invalidJson": "Invalid JSON",
+    "invalidGraphQL": "Invalid GraphQL",
+    "bodyType": "Type"
   },
   "MethodEditor": {
     "method": "Method"
