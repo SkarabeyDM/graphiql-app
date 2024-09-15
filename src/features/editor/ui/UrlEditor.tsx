@@ -7,7 +7,13 @@ import { IBodyData } from '@widgets/restFullClient/model/bodyManagerModel';
 import { encodeBase64 } from '@features/editor/lib/encodeBase64';
 import { IBodyEditorData } from '@widgets/graphQl/model/bodyEditorModel';
 
-const UrlEditor: FC<IUrlProps> = ({ url, setUrl, method, headers, body }) => {
+export const UrlEditor: FC<IUrlProps> = ({
+  url,
+  setUrl,
+  method,
+  headers,
+  body,
+}) => {
   const urlFormation = (
     method: ICRUD,
     headers: IHeadersData,
@@ -48,5 +54,3 @@ const UrlEditor: FC<IUrlProps> = ({ url, setUrl, method, headers, body }) => {
     </Box>
   );
 };
-
-export default UrlEditor;

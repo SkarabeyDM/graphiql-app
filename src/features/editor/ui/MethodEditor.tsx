@@ -8,7 +8,7 @@ import {
 import { ICRUD, IMethodProps } from '../model/methodEditorModel';
 import { FC } from 'react';
 
-const MethodEditor: FC<IMethodProps> = ({ method, setMethod }) => {
+export const MethodEditor: FC<IMethodProps> = ({ method, setMethod }) => {
   const handleChange = (e: SelectChangeEvent<string>): void => {
     const { value } = e?.target || {};
 
@@ -38,5 +38,3 @@ const MethodEditor: FC<IMethodProps> = ({ method, setMethod }) => {
     </FormControl>
   );
 };
-
-export default MethodEditor;

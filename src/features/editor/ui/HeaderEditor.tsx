@@ -7,7 +7,7 @@ import {
   IheadersProps,
 } from '../model/headersEditorModel';
 
-const HeaderEditor: FC<IheadersProps> = ({ setHeaders }) => {
+export const HeaderEditor: FC<IheadersProps> = ({ setHeaders }) => {
   const [count, setCount] = useState<number>(1);
   const [items, setItems] = useState<IHeadersItem[]>([]);
 
@@ -48,5 +48,3 @@ const HeaderEditor: FC<IheadersProps> = ({ setHeaders }) => {
     </Box>
   );
 };
-
-export default HeaderEditor;
