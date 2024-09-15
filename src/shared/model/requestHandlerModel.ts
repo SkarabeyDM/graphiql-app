@@ -12,3 +12,19 @@ export interface IRequestData {
   headers: IHeadersData;
   data: IBodyData | IBodyOfGraphQl | IBodyOfJson | null;
 }
+
+export interface IQueryParams {
+  [key: string]: string;
+}
+
+export enum EditorType {
+  GraphQL = 'GraphQL',
+  RestClient = 'RestClient',
+}
+
+export interface IRequest {
+  type: EditorType;
+  urlQuery: string;
+}
+
+export const LSKey = 'url-qwery-history';

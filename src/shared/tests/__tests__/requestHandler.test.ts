@@ -1,8 +1,8 @@
 import { sendRequest } from '@shared/lib/requestHandler';
 import { ICRUD } from '@features/editor/model/methodEditorModel';
-import { IRequestData } from '@widgets/restFullClient/model/requestHandlerModel';
 import axios from 'axios';
 import MockAdapter from 'axios-mock-adapter';
+import { EditorType, IRequestData } from '@shared/model/requestHandlerModel';
 
 describe('sendRequest', () => {
   let mock: MockAdapter;
@@ -32,7 +32,7 @@ describe('sendRequest', () => {
     const mockResponse = { data: 'response data' };
     mock.onGet('https://example.com').reply(200, mockResponse);
 
-    const response = await sendRequest(data);
+    const response = await sendRequest(EditorType.RestClient, data);
     expect(response?.data).toEqual(mockResponse);
   });
 
@@ -52,7 +52,7 @@ describe('sendRequest', () => {
 
     mock.onGet('https://example.com').reply(400, { message: 'Bad Request' });
 
-    const response = await sendRequest(data);
+    const response = await sendRequest(EditorType.RestClient, data);
     expect(response?.status).toBe(400);
     expect(response?.data).toEqual({ message: 'Bad Request' });
   });
@@ -73,7 +73,7 @@ describe('sendRequest', () => {
 
     mock.onGet('https://example.com').networkError();
 
-    const response = await sendRequest(data);
+    const response = await sendRequest(EditorType.RestClient, data);
     expect(response).toBeUndefined();
   });
 });

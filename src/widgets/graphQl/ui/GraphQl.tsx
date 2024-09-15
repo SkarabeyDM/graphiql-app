@@ -11,7 +11,7 @@ import { sendRequest } from '@shared/lib/requestHandler';
 import { showAlert } from '@shared/redux/slices/alertSlice';
 import { AlertStyle } from '@widgets/alert/model/Alert.model';
 import { useAppDispatch } from '@shared/redux';
-import { IRequestData } from '@shared/model/requestHandlerModel';
+import { EditorType, IRequestData } from '@shared/model/requestHandlerModel';
 
 const GraphQl: FC = () => {
   const dispatch = useAppDispatch();
@@ -49,7 +49,7 @@ const GraphQl: FC = () => {
       data: body ? body.body : body,
     };
 
-    const response = await sendRequest(DATA);
+    const response = await sendRequest(EditorType.GraphQL, DATA);
 
     const isSuccessfull: boolean =
       response?.status !== undefined && response.status < 300;

@@ -11,7 +11,7 @@ import { showAlert } from '@shared/redux/slices/alertSlice';
 import { AlertStyle } from '@widgets/alert/model/Alert.model';
 import { sendRequest } from '../../../shared/lib/requestHandler';
 import { HeaderEditor, MethodEditor, UrlEditor } from '@features/editor';
-import { IRequestData } from '@shared/model/requestHandlerModel';
+import { EditorType, IRequestData } from '@shared/model/requestHandlerModel';
 
 const RestFullClient: FC = () => {
   const dispatch = useAppDispatch();
@@ -38,7 +38,7 @@ const RestFullClient: FC = () => {
       data: body,
     };
 
-    const response = await sendRequest(DATA);
+    const response = await sendRequest(EditorType.RestClient, DATA);
 
     const isSuccessfull: boolean =
       response?.status !== undefined && response.status < 300;
