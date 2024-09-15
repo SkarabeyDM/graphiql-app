@@ -1,6 +1,6 @@
 import { yupResolver } from '@hookform/resolvers/yup';
 import { useForm } from 'react-hook-form';
-import { Box, Button, TextField } from '@mui/material';
+import { ButtonGroup, IconButton, Stack, TextField } from '@mui/material';
 import {
   IHeadersData,
   IHeadersElementProps,
@@ -8,8 +8,11 @@ import {
 } from '../model/headersEditorModel';
 import { FC, useState } from 'react';
 import { headersSchema } from '../model/schema';
+import { Delete, Edit, Save } from '@mui/icons-material';
+import { useTranslations } from 'next-intl';
 
 const OneHeaderElement: FC<IHeadersElementProps> = ({ id, setItems }) => {
+  const t = useTranslations('HeaderEditor');
   const [inputDisabled, setInputDisabled] = useState<boolean>(false);
 
   const {
@@ -36,19 +39,19 @@ const OneHeaderElement: FC<IHeadersElementProps> = ({ id, setItems }) => {
   };
 
   return (
-    <Box
-      display="flex"
+    <Stack
+      direction="row"
       onSubmit={handleSubmit(add)}
       component="form"
-      sx={{
-        '& > :not(style)': { m: 0.5 },
-      }}
+      alignItems="center"
+      py={1}
+      gap={1}
     >
       <TextField
         disabled={inputDisabled}
         fullWidth
         id="key"
-        label="Key"
+        label={t('key')}
         variant="outlined"
         error={!!errors.key}
         helperText={errors.key && errors.key.message ? errors.key.message : ''}
@@ -58,7 +61,7 @@ const OneHeaderElement: FC<IHeadersElementProps> = ({ id, setItems }) => {
         disabled={inputDisabled}
         fullWidth
         id="value"
-        label="Value"
+        label={t('value')}
         variant="outlined"
         error={!!errors.value}
         helperText={
@@ -66,26 +69,26 @@ const OneHeaderElement: FC<IHeadersElementProps> = ({ id, setItems }) => {
         }
         {...register('value', { onChange: () => null })}
       />
-      <Button
-        data-testid="Add"
-        type="submit"
-        disabled={inputDisabled || !isValid}
-        variant="contained"
-      >
-        Add
-      </Button>
-      <Button
-        onClick={() => setInputDisabled(false)}
-        data-testid="Upd"
-        disabled={!inputDisabled}
-        variant="contained"
-      >
-        Upd
-      </Button>
-      <Button onClick={del} data-testid="Del" variant="contained">
-        Del
-      </Button>
-    </Box>
+      <ButtonGroup>
+        <IconButton
+          data-testid="Add"
+          type="submit"
+          disabled={inputDisabled || !isValid}
+        >
+          <Save />
+        </IconButton>
+        <IconButton
+          onClick={() => setInputDisabled(false)}
+          data-testid="Upd"
+          disabled={!inputDisabled}
+        >
+          <Edit />
+        </IconButton>
+        <IconButton onClick={del} data-testid="Del">
+          <Delete />
+        </IconButton>
+      </ButtonGroup>
+    </Stack>
   );
 };
 

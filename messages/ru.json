@@ -14,6 +14,11 @@
     "graphiql": "GraphiQL",
     "history": "История"
   },
+  "HeaderEditor": {
+    "createHeader": "Создать заголовок",
+    "key": "Ключ",
+    "value": "Значение"
+  },
   "Greetings": {
     "welcome": "Добро пожаловать!",
     "welcomeBack": "С возвращением, [username]!"
