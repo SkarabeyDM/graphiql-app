@@ -5,13 +5,13 @@ import BodyManager from './BodyManager';
 import { ICRUD } from '../../../features/editor/model/methodEditorModel';
 import { IBodyData } from '../model/bodyManagerModel';
 import { IHeadersData } from '../../../features/editor/model/headersEditorModel';
-import { IRequestData } from '../model/requestHandlerModel';
 import { AxiosResponse } from 'axios';
 import { useAppDispatch } from '@shared/redux';
 import { showAlert } from '@shared/redux/slices/alertSlice';
 import { AlertStyle } from '@widgets/alert/model/Alert.model';
 import { sendRequest } from '../../../shared/lib/requestHandler';
 import { HeaderEditor, MethodEditor, UrlEditor } from '@features/editor';
+import { IRequestData } from '@shared/model/requestHandlerModel';
 
 const RestFullClient: FC = () => {
   const dispatch = useAppDispatch();

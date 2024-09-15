@@ -1,5 +1,5 @@
+import { IRequestData } from '@shared/model/requestHandlerModel';
 import axios from 'axios';
-import { IRequestData } from '../../widgets/restFullClient/model/requestHandlerModel';
 
 export const sendRequest = async ({
   method,

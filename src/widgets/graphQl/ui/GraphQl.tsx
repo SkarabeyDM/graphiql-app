@@ -7,11 +7,11 @@ import { FC, useEffect, useState } from 'react';
 import BodyEditor from './BodyEditor';
 import { IBodyEditorData } from '../model/bodyEditorModel';
 import { AxiosResponse } from 'axios';
-import { IRequestData } from '@widgets/restFullClient/model/requestHandlerModel';
 import { sendRequest } from '@shared/lib/requestHandler';
 import { showAlert } from '@shared/redux/slices/alertSlice';
 import { AlertStyle } from '@widgets/alert/model/Alert.model';
 import { useAppDispatch } from '@shared/redux';
+import { IRequestData } from '@shared/model/requestHandlerModel';
 
 const GraphQl: FC = () => {
   const dispatch = useAppDispatch();
